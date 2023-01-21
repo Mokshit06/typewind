@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path, { resolve } from 'path';
 import resolveConfig from 'tailwindcss/resolveConfig.js';
-import { createContext } from 'tailwindcss/src/lib/setupContextUtils.js';
 import prettier from 'prettier';
+import { createContext } from 'tailwindcss/lib/lib/setupContextUtils.js';
 
 function createDoc(doc: string) {
   return `
