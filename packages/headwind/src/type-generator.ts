@@ -43,7 +43,9 @@ const rootTypeTemplate = (
 
 ${others.join('\n')}
 
-type Headwind = ${types.join(' & ')};
+type Headwind = ${types.join(' & ')} & {
+  ${modifiers.map(variant => `${variant}(style: Property): Property`).join(';')}
+};
 
 declare const tw: Headwind;
 
@@ -91,7 +93,6 @@ export async function generateTypes() {
     s => !s.startsWith('-')
   );
 
-  // const classesWithSpecialSyntax = classList.filter(s => /\.|\//.test(s));
   const classesWithStandardSyntax = classList.filter(s => !/\.|\//.test(s));
   const standard = typeTemplate(
     'Standard',
@@ -140,11 +141,11 @@ export async function generateTypes() {
   }
 
   const arbitrary = typeTemplate('Arbitrary', arbitraryStyles);
-  // console.dir(ctx.candidateRuleMap.get('mt'), { depth: 6 });
 
   const root = rootTypeTemplate(
     [standard, arbitrary],
-    ['Standard', 'Arbitrary']
+    ['Standard', 'Arbitrary'],
+    [...ctx.variantMap.keys()].map(fmtHyphen)
   );
 
   fs.writeFileSync(
