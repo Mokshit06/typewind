@@ -15,7 +15,7 @@ export default defineConfig({
   define: {
     // fuck this is very very hacky lmfao
     // please fix this before publishing
-    __dirname: JSON.stringify(path.join(require.resolve('tailwindcss'), '..')),
+    __dirname: 'globalThis.tailwindPath',
   },
   dts: true,
 });
