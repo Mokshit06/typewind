@@ -9,13 +9,8 @@ export default defineConfig({
   splitting: false,
   clean: true,
   platform: 'node',
-  external: ['headwind'],
+  external: ['headwind', 'tailwindcss'],
   format: ['cjs', 'esm'],
   target: 'esnext',
-  define: {
-    // fuck this is very very hacky lmfao
-    // please fix this before publishing
-    __dirname: 'globalThis.tailwindPath',
-  },
   dts: true,
 });
