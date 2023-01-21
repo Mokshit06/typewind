@@ -1,0 +1,42 @@
+{
+  "name": "headwind",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "watch": "npm run build -- --watch"
+  },
+  "bin": {
+    "headwind": "dist/cli.cjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/*": "./dist/*",
+    "./babel": {
+      "types": "./dist/babel.d.ts",
+      "import": "./dist/babel.js",
+      "require": "./dist/babel.cjs"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.20.12",
+    "esbuild-register": "^3.4.2",
+    "merge-deep": "^3.0.3",
+    "prettier": "^2.8.3",
+    "tsup": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.20.0",
+    "@types/merge-deep": "^3.0.0",
+    "@types/prettier": "^2.7.2"
+  }
+}
