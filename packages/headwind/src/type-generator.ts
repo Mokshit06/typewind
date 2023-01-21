@@ -106,8 +106,7 @@ export async function generateTypes() {
           if (typeof ruleOrFn === 'function') {
             const [ruleSet] = ruleOrFn(rest ?? 'DEFAULT', {});
             if (ruleSet) {
-              const selector = Object.keys(ruleSet)[0];
-              css += `${selector} ${fmtRuleset(ruleSet[selector])}` + '\n';
+              css += fmtRuleToCss(ruleSet);
             }
           }
           if (typeof ruleOrFn == 'object') {
@@ -122,18 +121,18 @@ export async function generateTypes() {
   const candidates = [...ctx.candidateRuleMap.entries()];
   const arbitraryStyles: [string, string, string?][] = [];
   for (const [name, rules] of candidates) {
-    for (const [rule] of rules) {
+    for (const [rule, fn] of rules) {
       if (!rule.options || !rule.options.values) continue;
       const ident = fmtHyphen(name) + '_';
 
       arbitraryStyles.push([
         ident,
         objectTemplate(
-          Object.keys(rule.options.values).map(val => [
-            JSON.stringify(val),
-            'Property',
-            '',
-          ])
+          Object.keys(rule.options.values).map(val => {
+            const [ruleSet] = fn(val, {});
+
+            return [JSON.stringify(val), 'Property', fmtRuleToCss(ruleSet)];
+          })
         ) + ' & Record<string, Property>',
         undefined,
       ]);
@@ -182,4 +181,9 @@ function fmtNode(node: any) {
   if (node.type === 'rule') {
     return `${node.selector} {${node.nodes.map(fmtNode).join('')}}`;
   }
+}
+
+function fmtRuleToCss(ruleSet: any) {
+  const selector = Object.keys(ruleSet)[0];
+  return `${selector} ${fmtRuleset(ruleSet[selector])}`;
 }
