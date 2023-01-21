@@ -14,23 +14,36 @@ function createDoc(doc: string) {
   `;
 }
 
+const fmtHyphen = (s: string) => s.replace(/-/g, '_');
+
+const objectTemplate = (
+  props: [prop: string, type: string, doc?: string][]
+) => {
+  return `{${props
+    .map(
+      ([prop, type, doc]) =>
+        `/** ${doc ? createDoc(doc) : ''} */ ${prop}: ${type};`
+    )
+    .join('\n')}}`;
+};
+
 const typeTemplate = (
   name: string,
-  props: [prop: string, type: string, doc: string][]
+  props: [prop: string, type: string, doc?: string][]
 ) => `
-type ${name} = {
-  ${props
-    .map(([prop, type, doc]) => `/** ${createDoc(doc)} */ ${prop}: ${type};`)
-    .join('\n')}
-}
+type ${name} = ${objectTemplate(props)}
 `;
 
-const rootTypeTemplate = (others: string[], types: string[]) =>
+const rootTypeTemplate = (
+  others: string[],
+  types: string[],
+  modifiers: string[] = []
+) =>
   `type Property = Headwind & string;
 
 ${others.join('\n')}
 
-type Headwind = ${types.join(' & ')}
+type Headwind = ${types.join(' & ')};
 
 declare const tw: Headwind;
 
@@ -69,11 +82,6 @@ function getCandidateItem(
   return { rule, rest };
 }
 
-function removeLastHyphen(str: string) {
-  const arr = str.split('-');
-  return arr.slice(0, arr.length - 1).join('-');
-}
-
 export async function generateTypes() {
   const configFile = getConfigPath();
   const userConfig = resolveConfig(require(configFile!));
@@ -82,17 +90,8 @@ export async function generateTypes() {
   const classList = (ctx.getClassList() as string[]).filter(
     s => !s.startsWith('-')
   );
-  const classNames = [
-    ...new Set(
-      classList
-        .filter(s => s.includes('-'))
-        .map(s => {
-          removeLastHyphen(s).replace(/-/g, '_');
-        })
-    ),
-  ];
 
-  const classesWithSpecialSyntax = classList.filter(s => /\.|\//.test(s));
+  // const classesWithSpecialSyntax = classList.filter(s => /\.|\//.test(s));
   const classesWithStandardSyntax = classList.filter(s => !/\.|\//.test(s));
   const standard = typeTemplate(
     'Standard',
@@ -117,13 +116,32 @@ export async function generateTypes() {
         }
       }
 
-      return [s.replace(/-/g, '_'), 'Property', css];
+      return [fmtHyphen(s), 'Property', css];
     })
   );
-  const arbitrary = typeTemplate(
-    'Arbitrary',
-    classNames.map(s => [`${s}_`, 'Record<string, Property>', ''])
-  );
+  const candidates = [...ctx.candidateRuleMap.entries()];
+  const arbitraryStyles: [string, string, string?][] = [];
+  for (const [name, rules] of candidates) {
+    for (const [rule] of rules) {
+      if (!rule.options || !rule.options.values) continue;
+      const ident = fmtHyphen(name) + '_';
+
+      arbitraryStyles.push([
+        ident,
+        objectTemplate(
+          Object.keys(rule.options.values).map(val => [
+            JSON.stringify(val),
+            'Property',
+            '',
+          ])
+        ) + ' & Record<string, Property>',
+        undefined,
+      ]);
+    }
+  }
+
+  const arbitrary = typeTemplate('Arbitrary', arbitraryStyles);
+  // console.dir(ctx.candidateRuleMap.get('mt'), { depth: 6 });
 
   const root = rootTypeTemplate(
     [standard, arbitrary],
