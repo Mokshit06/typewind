@@ -1,27 +1,25 @@
 {
-  "name": "headwind",
+  "name": "typewind",
   "version": "0.0.1",
   "description": "",
-  "type": "module",
-  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
   "scripts": {
     "build": "tsup",
     "watch": "npm run build -- --watch"
   },
   "bin": {
-    "headwind": "dist/cli.cjs"
+    "typewind": "dist/cli.cjs"
   },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "default": "./dist/index.cjs"
     },
     "./dist/*": "./dist/*",
     "./babel": {
       "types": "./dist/babel.d.ts",
-      "import": "./dist/babel.js",
-      "require": "./dist/babel.cjs"
+      "default": "./dist/babel.cjs"
     }
   },
   "keywords": [],
@@ -30,9 +28,11 @@
   "dependencies": {
     "@babel/core": "^7.20.12",
     "esbuild-register": "^3.4.2",
+    "eval": "^0.1.8",
     "merge-deep": "^3.0.3",
     "prettier": "^2.8.3",
-    "tsup": "^6.5.0"
+    "tsup": "^6.5.0",
+    "twind": "^0.16.19"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.0",

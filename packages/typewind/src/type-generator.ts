@@ -1,8 +1,7 @@
 import fs from 'fs';
-import path, { resolve } from 'path';
-import resolveConfig from 'tailwindcss/resolveConfig.js';
+import path from 'path';
 import prettier from 'prettier';
-import { createContext } from 'tailwindcss/lib/lib/setupContextUtils.js';
+import { createTypewindContext } from './utils';
 
 function createDoc(doc: string) {
   return `
@@ -39,30 +38,18 @@ const rootTypeTemplate = (
   types: string[],
   modifiers: string[] = []
 ) =>
-  `type Property = Headwind & string;
+  `type Property = Typewind & string;
 
 ${others.join('\n')}
 
-type Headwind = ${types.join(' & ')} & {
+type Typewind = ${types.join(' & ')} & {
   ${modifiers.map(variant => `${variant}(style: Property): Property`).join(';')}
 };
 
-declare const tw: Headwind;
+declare const tw: Typewind;
 
 export { tw };
 `;
-
-function getConfigPath() {
-  for (const configFile of ['./tailwind.config.js', './tailwind.config.cjs']) {
-    try {
-      const configPath = path.join(process.cwd(), configFile);
-      fs.accessSync(configPath);
-      return configPath;
-    } catch (err) {}
-  }
-
-  throw new Error('No tailwind config file found');
-}
 
 function getCandidateItem(
   map: Map<string, any>,
@@ -85,10 +72,7 @@ function getCandidateItem(
 }
 
 export async function generateTypes() {
-  const configFile = getConfigPath();
-  const userConfig = resolveConfig(require(configFile!));
-
-  const ctx = createContext(userConfig);
+  const ctx = createTypewindContext();
   const classList = (ctx.getClassList() as string[]).filter(
     s => !s.startsWith('-')
   );
@@ -149,7 +133,7 @@ export async function generateTypes() {
   );
 
   fs.writeFileSync(
-    path.join(require.resolve('headwind'), '../index.d.ts'),
+    path.join(require.resolve('typewind'), '../index.d.ts'),
     root,
     'utf8'
   );

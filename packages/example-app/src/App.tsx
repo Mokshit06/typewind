@@ -1,5 +1,7 @@
-import { tw } from 'headwind';
+import { tw } from 'typewind';
 
 export default function App() {
-  return <h1 className={tw.md(tw.text_sm)}>tailwind + ts?</h1>;
+  return (
+    <h1 className={tw.text_red_800.dark(tw.text_red_400)}>tailwind + ts?</h1>
+  );
 }

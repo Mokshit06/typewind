@@ -5,12 +5,12 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/cli.ts', 'src/babel.ts'],
+  entry: ['src/index.ts', 'src/cli.ts', 'src/babel.ts', 'src/evaluate.ts'],
   splitting: false,
   clean: true,
   platform: 'node',
-  external: ['headwind', 'tailwindcss'],
-  format: ['cjs', 'esm'],
+  external: ['typewind', 'tailwindcss'],
+  format: ['cjs'],
   target: 'esnext',
   dts: true,
 });
