@@ -20,7 +20,7 @@ function fmtArbitraryRule(name: string, value: string, candidateRuleMap: any) {
 
 const fmt = (s: string) => s.replace(/_/g, '-');
 
-export const createTW: any = () => {
+export const createTw: any = () => {
   const twUsed = (classes = new Set<string>()) => {
     const target = {
       classes,

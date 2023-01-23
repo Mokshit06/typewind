@@ -5,16 +5,10 @@ import {
   types as t,
   Visitor,
 } from '@babel/core';
-import eval from 'eval';
+import _eval from 'eval';
 import path from 'path';
 import { createTypewindContext } from './utils';
 import generator from '@babel/generator';
-
-export function typewindContent() {
-  const typewind = require.resolve('typewind');
-
-  return path.join(typewind, '..', '..', '.generated');
-}
 
 function fmt(str: string) {
   return str.replace(/_/g, '-');
@@ -58,15 +52,12 @@ export default function headingBabelPlugin(): PluginObj<
         )
           return;
 
-        console.log('tw access');
+        const code: string = generator(prevPath.node).code;
 
-        const code: string = (generator as any).default(prevPath.node).code;
-        console.log(code);
-
-        const { result } = eval(
+        const { result } = _eval(
           `
-const {createTW} = require("typewind/dist/evaluate.cjs");
-const tw = createTW();
+const { createTw } = require("typewind/dist/evaluate.js");
+const tw = createTw();
 exports.result = ${code}.toString()
 `,
           true

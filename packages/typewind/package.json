@@ -3,23 +3,27 @@
   "version": "0.0.1",
   "description": "",
   "types": "dist/index.d.ts",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
     "watch": "npm run build -- --watch"
   },
   "bin": {
-    "typewind": "dist/cli.cjs"
+    "typewind": "dist/cli.js"
   },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.cjs"
+      "default": "./dist/index.js"
     },
     "./dist/*": "./dist/*",
     "./babel": {
       "types": "./dist/babel.d.ts",
-      "default": "./dist/babel.cjs"
+      "default": "./dist/babel.js"
+    },
+    "./transform": {
+      "types": "./dist/transform.d.ts",
+      "default": "./dist/transform.js"
     }
   },
   "keywords": [],
