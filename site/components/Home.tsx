@@ -42,7 +42,7 @@ export default function Home() {
             className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 p-8 rounded-lg w-full flex items-center justify-center gap-2 sm:w-auto bg-gray-800 hover:bg-gray-700"
             target="_blank"
             rel="noreferrer"
-            href="//github.com/mokshit06/headwind"
+            href="//github.com/mokshit06/typewind"
           >
             <svg
               stroke="currentColor"

@@ -1,5 +1,7 @@
-import { SiTypescript } from "react-icons/si";
-import { MdExtensionOff } from "react-icons/md";
+import { SiTailwindcss, SiTypescript } from "react-icons/si";
+import { MdExtensionOff, MdExposureZero } from "react-icons/md";
+import { RiSettingsFill } from "react-icons/ri";
+import { CiFolderOff } from "react-icons/ci";
 
 type FeatureCardProps = {
   icon: React.ReactNode;
@@ -10,41 +12,61 @@ type FeatureCardProps = {
 export const Features = () => {
   const features: FeatureCardProps[] = [
     {
+      icon: <CiFolderOff size="2em" />,
+      title: "Zero Bundle Size",
+      description: (
+        <>
+          Typewind compiles away all the styles used, and converts them to
+          static classes at build time.
+        </>
+      ),
+    },
+    {
+      icon: <SiTailwindcss size="1.5em" />,
+      title: "Apply variants to multiple styles at once",
+      description: (
+        <>
+          Since Typewind uses TS, it allows for more intuitive syntax for
+          applying variants.
+        </>
+      ),
+    },
+    {
       icon: <SiTypescript size="1.5em" />,
       title: "Typesafe",
       description: (
         <>
-          Typewind is a completely typesafe version of Tailwind CSS. It has type
-          definitions for all classes and variants custom to your{" "}
+          Using the TS compiler, Typewind is able to provide type safety to
+          tailwind, and provide intellisense & autocomplete for all the classes
+          from{" "}
           <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
             tailwind.config.js
           </code>
+        </>
+      ),
+    },
+    {
+      icon: <RiSettingsFill size="1.5em" />,
+      title: "Types generated from config",
+      description: (
+        <>
+          Type definitions of{" "}
+          <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
+            tw
+          </code>{" "}
+          are generated directly from your tailwind config, so it is always
+          custom to you, and also creates types for custom theme palette and
+          plugins.
         </>
       ),
     },
     {
       icon: <MdExtensionOff size="1.5em" />,
-      title: "No Extensions Required",
+      title: "No need of extensions",
       description: (
         <>
-          Typewind is a completely typesafe version of Tailwind CSS. It has type
-          definitions for all classes and variants custom to your{" "}
-          <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
-            tailwind.config.js
-          </code>
-        </>
-      ),
-    },
-    {
-      icon: <SiTypescript size="1.5em" />,
-      title: "Typesafe",
-      description: (
-        <>
-          Typewind is a completely typesafe version of Tailwind CSS. It has type
-          definitions for all classes and variants custom to your{" "}
-          <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
-            tailwind.config.js
-          </code>
+          Type definitions and CSS Docs are generated from your tailwind config,
+          so you don't need to install any extensions.
         </>
       ),
     },
