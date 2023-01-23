@@ -18,7 +18,7 @@ const styles = tw.border.hover(tw.border_black);
 
 ## How it works
 
-Typewind uses a babel compiler that runs over your code, statically analyses it and converts all the `tw` styles into their corresponding Tailwind classes.
+Typewind's compiler is a babel plugin that runs over your code, statically analyses it and converts all the `tw` styles into their corresponding Tailwind classes.
 
 This results Typewind compiles away, leaving 0 runtime code.
 

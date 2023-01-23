@@ -1,4 +1,5 @@
 import { tw } from 'typewind';
+import './index.css';
 
 export default function App() {
   return (
