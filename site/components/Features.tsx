@@ -27,8 +27,8 @@ export const Features = () => {
       title: 'Apply variants to multiple styles at once',
       description: (
         <>
-          Since Typewind uses TS, it allows for more intuitive syntax for
-          applying variants.
+          Typewind provides an intuitive syntax to apply variants to multiple
+          styles.
         </>
       ),
     },
@@ -37,9 +37,8 @@ export const Features = () => {
       title: 'Typesafe',
       description: (
         <>
-          Using the TS compiler, Typewind is able to provide type safety to
-          tailwind, and provide intellisense & autocomplete for all the classes
-          from{' '}
+          Using TS intellisense, Typewind is able to provide type safety to
+          tailwind, and provide autocomplete for all the classes from{' '}
           <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
             tailwind.config.js
           </code>
@@ -55,9 +54,8 @@ export const Features = () => {
           <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
             tw
           </code>{' '}
-          are generated directly from your tailwind config, so it is always
-          custom to you, and also creates types for custom theme palette and
-          plugins.
+          are generated from your `tailwind.config.js`, and also creates types
+          for custom theme palette and plugins.
         </>
       ),
     },
@@ -66,8 +64,9 @@ export const Features = () => {
       title: 'No need of extensions',
       description: (
         <>
-          Type definitions and CSS Docs are generated from your tailwind config,
-          so you don't need to install any extensions.
+          Type definitions along with CSS Docs are generated from your tailwind
+          config and work using editors's built-in IntelliSense, and doesn't
+          require extra extensions.
         </>
       ),
     },
@@ -76,8 +75,8 @@ export const Features = () => {
       title: 'Supports all frameworks',
       description: (
         <>
-          Typewind works with most Javascript/Typescript frameworks like NextJS,
-          SolidStart, Vite, etc.
+          Typewind works with most Javascript/Typescript frameworks and build
+          tools like NextJS, SolidStart, Vite, etc.
         </>
       ),
     },
