@@ -1,3 +1,4 @@
+import { FiCode } from 'react-icons/fi';
 import { SiTailwindcss, SiTypescript } from 'react-icons/si';
 import { MdExtensionOff, MdExposureZero } from 'react-icons/md';
 import { RiSettingsFill } from 'react-icons/ri';
@@ -70,14 +71,24 @@ export const Features = () => {
         </>
       ),
     },
+    {
+      icon: <FiCode size="1.5em" />,
+      title: 'Supports all frameworks',
+      description: (
+        <>
+          Typewind works with most Javascript/Typescript frameworks like NextJS,
+          SolidStart, Vite, etc.
+        </>
+      ),
+    },
   ];
   return (
     <div className="w-full min-h-[600px] py-16 md:pt-20">
       <h2 className="font-bold text-2xl lg:text-3xl xl:text-4xl text-center">
         Why Typewind?
       </h2>
-      <div className="mx-auto lg:max-w-7xl mt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 lg:gap-y-12">
+      <div className="mx-auto lg:max-w-8xl mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-8 lg:gap-y-12">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}
@@ -94,7 +105,7 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
         {icon}
       </div>
       <h3 className="text-lg font-semibold text-gray-100 mt-4">{title}</h3>
-      <p className="text-gray-500 mt-2">{description}</p>
+      <p className="text-gray-400 mt-2">{description}</p>
     </div>
   );
 };

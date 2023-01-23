@@ -3,16 +3,16 @@ import { Features } from './Features';
 
 export default function Home() {
   return (
-    <main className="my-6 max-w-[75rem] flex flex-col mx-auto items-center">
-      <div className="max-w-[53rem]">
+    <main className="my-6 max-w-[75rem] flex flex-col px-4 mx-auto items-center">
+      <div className="w-full max-w-[53rem]">
         <h1>
-          <span className="block text-center font-extrabold md:text-6xl mt-12">
+          <span className="block text-center font-extrabold text-lg sm:text-xl md:text-6xl mt-12">
             Bringing typesafety to Tailwind
           </span>
         </h1>
 
         <div className="mt-4">
-          <p className="text-xl mb-2 font-medium text-gray-400 md:!text-xl mx-auto max-w-full w-[880px] text-center px-4">
+          <p className="text-md sm:text-lg text-xl mb-2 font-medium text-gray-400 md:!text-xl mx-auto max-w-full w-[880px] text-center px-4">
             Introducing Typewind, the magic of Tailwind combined with the{' '}
             <span className="underline decoration-wavy decoration-red-500 text-white underline-offset-4 font-mono">
               safety
