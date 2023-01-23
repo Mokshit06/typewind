@@ -9,3 +9,7 @@ body {
 iframe#twitter-widget-0 {
   border-radius: 12px;
 }
+
+.nextra-callout ul {
+  margin: 0 !important;
+}
