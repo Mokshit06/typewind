@@ -66,8 +66,9 @@ export default function Home() {
         </a>
       </div>
       <video
-        src="/demo.mp4"
-        className="hidden md:block w-full shadow-xl max-w-[60rem]"
+        src="/preview.mov"
+        style={{ filter: 'brightness(0.9) saturate(120%) contrast(95%)' }}
+        className="hidden md:block w-full shadow-2xl max-w-[60rem]"
         autoPlay
         loop
         muted

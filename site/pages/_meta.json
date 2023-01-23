@@ -10,9 +10,5 @@
   "docs": {
     "title": "Documentation",
     "type": "page"
-  },
-  "about": {
-    "title": "About",
-    "type": "page"
   }
 }
