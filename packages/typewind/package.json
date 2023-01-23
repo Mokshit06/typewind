@@ -20,6 +20,10 @@
     "./babel": {
       "types": "./dist/babel.d.ts",
       "default": "./dist/babel.js"
+    },
+    "./transform": {
+      "types": "./dist/transform.d.ts",
+      "default": "./dist/transform.js"
     }
   },
   "keywords": [],

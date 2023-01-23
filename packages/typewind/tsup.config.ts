@@ -5,7 +5,13 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/cli.ts', 'src/babel.ts', 'src/evaluate.ts'],
+  entry: [
+    'src/index.ts',
+    'src/cli.ts',
+    'src/babel.ts',
+    'src/evaluate.ts',
+    'src/transform.ts',
+  ],
   splitting: false,
   clean: true,
   platform: 'node',
