@@ -58,15 +58,12 @@ export default function headingBabelPlugin(): PluginObj<
         )
           return;
 
-        console.log('tw access');
-
-        const code: string = (generator as any).default(prevPath.node).code;
-        console.log(code);
+        const code: string = generator(prevPath.node).code;
 
         const { result } = eval(
           `
-const {createTW} = require("typewind/dist/evaluate.cjs");
-const tw = createTW();
+const { createTw } = require("typewind/dist/evaluate.js");
+const tw = createTw();
 exports.result = ${code}.toString()
 `,
           true
