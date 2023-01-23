@@ -54,3 +54,5 @@ const styles = tw.border_blackk; // ❌ Property 'border_blackk' does not exist 
 ```
 
 The above code would also return in a build error on running `tsc`
+
+**Types generated from config** - Type definitions of `tw` are generated directly from your tailwind config, so it is always custom to you, and also creates types for custom theme palette and plugins.
