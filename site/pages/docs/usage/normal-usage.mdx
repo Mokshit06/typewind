@@ -1,15 +1,16 @@
-import { Callout } from "nextra-theme-docs"
-import { CodeOutput } from "../../../components/CodeOutput"
+import { Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
 
 # Normal Usage
-All the utility classes provided by Tailwind are available in the `tw` proxy.
+
+All the utility classes provided by Tailwind are available in the `tw` proxy, and can be chained one after another. They can be found in the [Tailwind Docs](https://tailwindcss.com/docs/utility-first).
 
 <Callout type="info">
-  The hyphens(`-`) between the tailwind classes is replaced with an underscore(`_`).
+  The hyphens(`-`) in the tailwind classes is replaced with an underscore(`_`)
 </Callout>
 
 ```jsx
-import { tw } from "typewind";
+import { tw } from 'typewind';
 
 export default function Button() {
   return (
@@ -21,12 +22,5 @@ export default function Button() {
 ```
 
 <CodeOutput>
-  <button className="bg-blue-500 text-white rounded py-3 px-4">
-    Click Me
-  </button>
+  <button className="bg-blue-500 text-white rounded py-3 px-4">Click Me</button>
 </CodeOutput>
-
-<Callout type="info">
-All the utility classes provided by Tailwind are available in the <code>tw</code> proxy. They can be found in the [Tailwind Docs](https://tailwindcss.com/docs/utility-first).
-</Callout>
-

@@ -1,14 +1,15 @@
-import { Callout } from "nextra-theme-docs"
-import { CodeOutput } from "../../../components/CodeOutput"
+import { Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
 
 ## Modifiers
+
 [Pseudo-classes](https://tailwindcss.com/docs/hover-focus-and-other-states#pseudo-classes) like `:hover` and `:focus`, [Pseudo-elements](https://tailwindcss.com/docs/hover-focus-and-other-states#pseudo-elements) like `::before`, `::after`,
 `::placeholder` and `::selection`, [Media and feature queries](https://tailwindcss.com/docs/hover-focus-and-other-states#media-and-feature-queries) and [Attribute Selectors](https://tailwindcss.com/docs/hover-focus-and-other-states#attribute-selectors) are available as a function.
 
 Typewind also have a `dark` function which is used to apply styles when the user is in dark mode.
 
 ```jsx /md(tw.py_4.px_5)/ {7,9}
-import { tw } from "typewind";
+import { tw } from 'typewind';
 
 export default function Button() {
   return (
@@ -31,11 +32,13 @@ export default function Button() {
 </CodeOutput>
 
 <Callout type="info">
-For more reference, checkout the Tailwind docs for [Handling Hover, Focus, and Other States](https://tailwindcss.com/docs/hover-focus-and-other-states), [Responsive Design](https://tailwindcss.com/docs/responsive-design), and [Dark Mode](https://tailwindcss.com/docs/dark-mode).
+  For more reference, checkout the Tailwind docs for [Handling Hover, Focus, and
+  Other States](https://tailwindcss.com/docs/hover-focus-and-other-states),
+  [Responsive Design](https://tailwindcss.com/docs/responsive-design), and [Dark
+  Mode](https://tailwindcss.com/docs/dark-mode).
 </Callout>
 
-<Callout type="warning">
+<Callout emoji="⚠️">
 **Differences from Tailwind**:
 Because of the way Typewind works, you cannot use `tw.2xl()` for responsiveness but will have to use `tw._2xl(){:jsx}`.
 </Callout>
-
