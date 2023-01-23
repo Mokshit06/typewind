@@ -17,7 +17,7 @@ export default function Home() {
             Bringing typesafety to Tailwind
           </h1>
           <p className="text-gray-500 font-semibold text-lg md:text-2xl mt-4">
-            Introducing Headwind, a{" "}
+            Introducing Typewind, a{" "}
             <span className="underline decoration-wavy decoration-red-500">
               typesafe
             </span>{" "}

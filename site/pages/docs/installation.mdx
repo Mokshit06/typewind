@@ -1,0 +1,92 @@
+import { Tab, Tabs, Callout } from "nextra-theme-docs";
+
+# Get started with Typewind
+
+## Setup Tailwind
+Make sure you have Tailwind setup. You can follow the [official Tailwind Installation docs](https://tailwindcss.com/docs/installation) to get started.
+
+## Installation
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+  <Tab>
+    ```sh copy
+    npm install typewind
+    ```
+  </Tab>
+  <Tab>
+    ```sh copy
+    yarn add typewind
+    ```
+  </Tab>
+  <Tab>
+    ```sh copy
+    pnpm add typewind
+    ```
+  </Tab>
+</Tabs>
+
+## Generating type definitions
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+  <Tab>
+    ```sh copy
+    npm typewind generate
+    ```
+  </Tab>
+  <Tab>
+    ```sh copy
+    yarn typewind generate
+    ```
+  </Tab>
+  <Tab>
+    ```sh copy
+    pnpm typewind generate
+    ```
+  </Tab>
+</Tabs>
+
+`typewind generate` goes through your `tailwind.config.js` and generates type definitions and css docs for you. This means that the type definitions will be custom to your configuration.
+
+## Quick Start
+You can use typewind in two ways. You can either use it in runtime as a tailwind plugin or you can use it using babel at build time.
+
+<Callout type="info">Note that in both the ways, the css is generated at build time.</Callout>
+<Tabs items={['Tailwind Transform', 'Tailwind Transform + Babel']}>
+  <Tab>
+    Add the following to your `tailwind.config.js`.
+    ```js filename="tailwind.config.js" copy {8}
+    /** @type {import('tailwindcss').Config} */
+    module.exports = {
+      content: ["./src/**/*.{js,jsx,ts,tsx,mdx}"],
+      theme: {
+        extend: {},
+      },
+      plugins: [
+        require("typewind/plugin"),
+      ],
+    }
+    ````
+  </Tab>
+  <Tab>
+    1. Add the following to your `.babelrc`.
+    ```json filename=".babelrc" copy {4}
+    {
+      "presets": [],
+      "plugins": [
+        "typewind/babel",
+      ]
+    }
+    ````
+    2. Edit your `tailwind.config.js`.
+    ```js filename="tailwind.config.js" copy
+    /** @type {import('tailwindcss').Config} */
+    const typewindTransforms = require("typewind/transforms");
+    module.exports = {
+      content: {
+        files: ['./src/**/*.{js,jsx,ts,tsx,mdx}'],
+        transform: {
+          ...typewindTransforms
+        }
+      },
+    }
+    ````
+  </Tab>
+</Tabs>

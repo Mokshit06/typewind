@@ -1,7 +1,7 @@
 {
-  "name": "nextra-docs-template",
+  "name": "site",
   "version": "0.0.1",
-  "description": "Nextra docs template",
+  "description": "Typewind Docs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,13 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/shuding/nextra-docs-template.git"
   },
-  "author": "Shu Ding <g@shud.in>",
+  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shuding/nextra-docs-template/issues"
-  },
-  "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
+    "date-fns": "^2.29.3",
+    "micromark-extension-mdxjs-esm": "^1.0.3",
     "next": "^13.0.6",
     "nextra": "2.0.1",
     "nextra-theme-docs": "2.0.1",

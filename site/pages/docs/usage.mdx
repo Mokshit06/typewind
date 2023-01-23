@@ -1,0 +1,117 @@
+import { Callout } from "nextra-theme-docs"
+import { CodeOutput } from "../../components/CodeOutput"
+
+# Usage
+
+## Example
+```jsx
+import { tw } from "typewind";
+
+export default function App() {
+  return (
+    <div
+      className={tw.flex.items_center.justify_center.h_screen.bg_white.text_black.dark(
+        tw.bg_black.text_white
+      )}
+    >
+      <h1 className={tw.text_xl.sm(tw.text_3xl).md(tw.text_4xl).font_bold}>
+        Hello World
+      </h1>
+    </div>
+  );
+}
+```
+
+## Normal Usage
+All the utility classes provided by Tailwind are available in the `tw` proxy.
+
+<Callout type="info">
+  The hyphens(`-`) between the tailwind classes is replaced with an underscore(`_`).
+</Callout>
+
+```jsx
+import { tw } from "typewind";
+
+export default function Button() {
+  return (
+    <button className={tw.bg_blue_500.text_white.rounded.py_3.px-4}>
+      Click Me
+    </button>
+  );
+}
+```
+
+<CodeOutput>
+  <button className="bg-blue-500 text-white rounded py-3 px-4">
+    Click Me
+  </button>
+</CodeOutput>
+
+<Callout type="info">
+All the utility classes provided by Tailwind are available in the <code>tw</code> proxy. They can be found in the [Tailwind Docs](https://tailwindcss.com/docs/utility-first).
+</Callout>
+
+## Modifiers
+[Pseudo-classes](https://tailwindcss.com/docs/hover-focus-and-other-states#pseudo-classes) like `:hover` and `:focus`, [Pseudo-elements](https://tailwindcss.com/docs/hover-focus-and-other-states#pseudo-elements) like `::before`, `::after`,
+`::placeholder` and `::selection`, [Media and feature queries](https://tailwindcss.com/docs/hover-focus-and-other-states#media-and-feature-queries) and [Attribute Selectors](https://tailwindcss.com/docs/hover-focus-and-other-states#attribute-selectors) are available as a function.
+
+We also have a `dark` function which is used to apply styles when the user is in dark mode.
+
+```jsx /md(tw.py_4.px_5)/ {7,9}
+import { tw } from "typewind";
+
+export default function Button() {
+  return (
+    <button
+      className={tw.bg_blue_500
+        .hover(tw.bg_blue_600)
+        .text_white.rounded.py_3.px_4.md(tw.py_4.px_5)
+        .dark(tw.bg_sky_900.hover(tw.bg_sky_800))}
+    >
+      Click Me
+    </button>
+  );
+}
+```
+
+<CodeOutput>
+  <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-3 md:py-4 dark:bg-sky-900 dark:hover:bg-sky-800">
+    Click Me
+  </button>
+</CodeOutput>
+
+<Callout type="info">
+For more reference, checkout the Tailwind docs for [Handling Hover, Focus, and Other States](https://tailwindcss.com/docs/hover-focus-and-other-states), [Responsive Design](https://tailwindcss.com/docs/responsive-design), and [Dark Mode](https://tailwindcss.com/docs/dark-mode).
+</Callout>
+
+## Arbitrary Values
+You can also pass arbitrary values to the `tw` proxy using the same familiar `[]` syntax which tailwind provides us with.
+
+```jsx
+import { tw } from "typewind";
+
+export default function App() {
+  return (
+    <button
+      className={
+        tw.bg_blue_500
+          .hover(tw.bg_blue_600)
+          .text_white.rounded.py_3.px_4.md(tw.py_4.px_5)
+          .dark(tw.bg_sky_900.hover(tw.bg_sky_800)).border.border_["#f66666"]
+      }
+    >
+      Click Me
+    </button>
+  );
+}
+```
+
+<CodeOutput>
+  <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-3 md:py-4 dark:bg-sky-900 dark:hover:bg-sky-800 border border-[#f66666]">
+    Click Me
+  </button>
+</CodeOutput>
+
+<Callout type="info">
+For more reference, checkout the [Tailwind Docs for Arbitrary Values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values).
+</Callout>
