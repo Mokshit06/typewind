@@ -1,0 +1,23 @@
+import { Callout } from "nextra-theme-docs"
+import { CodeOutput } from "../../components/CodeOutput"
+
+# Usage
+
+## Example
+```jsx
+import { tw } from "typewind";
+
+export default function App() {
+  return (
+    <div
+      className={tw.flex.items_center.justify_center.h_screen.bg_white.text_black.dark(
+        tw.bg_black.text_white
+      )}
+    >
+      <h1 className={tw.text_xl.sm(tw.text_3xl).md(tw.text_4xl).font_bold}>
+        Hello World
+      </h1>
+    </div>
+  );
+}
+```

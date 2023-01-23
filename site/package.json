@@ -1,0 +1,33 @@
+{
+  "name": "site",
+  "version": "0.0.1",
+  "description": "Typewind Docs",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuding/nextra-docs-template.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "date-fns": "^2.29.3",
+    "micromark-extension-mdxjs-esm": "^1.0.3",
+    "next": "^13.0.6",
+    "nextra": "2.0.1",
+    "nextra-theme-docs": "2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.10",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.3"
+  }
+}

@@ -1,0 +1,44 @@
+import { Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
+
+## Modifiers
+
+[Pseudo-classes](https://tailwindcss.com/docs/hover-focus-and-other-states#pseudo-classes) like `:hover` and `:focus`, [Pseudo-elements](https://tailwindcss.com/docs/hover-focus-and-other-states#pseudo-elements) like `::before`, `::after`,
+`::placeholder` and `::selection`, [Media and feature queries](https://tailwindcss.com/docs/hover-focus-and-other-states#media-and-feature-queries) and [Attribute Selectors](https://tailwindcss.com/docs/hover-focus-and-other-states#attribute-selectors) are available as a function.
+
+Typewind also have a `dark` function which is used to apply styles when the user is in dark mode.
+
+```jsx /md(tw.py_4.px_5)/ {7,9}
+import { tw } from 'typewind';
+
+export default function Button() {
+  return (
+    <button
+      className={tw.bg_blue_500
+        .hover(tw.bg_blue_600)
+        .text_white.rounded.py_3.px_4.md(tw.py_4.px_5)
+        .dark(tw.bg_sky_900.hover(tw.bg_sky_800))}
+    >
+      Click Me
+    </button>
+  );
+}
+```
+
+<CodeOutput>
+  <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-3 md:py-4 dark:bg-sky-900 dark:hover:bg-sky-800">
+    Click Me
+  </button>
+</CodeOutput>
+
+<Callout type="info">
+  For more reference, checkout the Tailwind docs for [Handling Hover, Focus, and
+  Other States](https://tailwindcss.com/docs/hover-focus-and-other-states),
+  [Responsive Design](https://tailwindcss.com/docs/responsive-design), and [Dark
+  Mode](https://tailwindcss.com/docs/dark-mode).
+</Callout>
+
+<Callout emoji="⚠️">
+**Differences from Tailwind**:
+Because of the way Typewind works, you cannot use `tw.2xl()` for responsiveness but will have to use `tw._2xl(){:jsx}`.
+</Callout>

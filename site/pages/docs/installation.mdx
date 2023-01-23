@@ -1,0 +1,62 @@
+import { Tab, Tabs, Callout } from 'nextra-theme-docs';
+
+# Get started with Typewind
+
+## Setup Tailwind
+
+Make sure you have Tailwind setup. You can follow the [official Tailwind Installation docs](https://tailwindcss.com/docs/installation) to get started.
+
+## Installation
+
+Install `typewind` via npm
+
+```fish filename="Terminal" copy
+npm install typewind
+```
+
+## Generating type definitions
+
+`typewind generate` goes through your `tailwind.config.js` and generates type definitions and css docs based on your theme. This means that the type definitions will be custom to your configuration, and include styles for plugins etc.
+
+```fish filename="Terminal" copy
+npx typewind generate
+```
+
+<Callout>
+  These definitions need to be generated each time you install a new package via
+  npm.
+</Callout>
+
+## Quick Start
+
+1. **Setup babel plugin**
+   <br />
+   Add the `typewind` plugin to your `.babelrc`.
+
+```json filename=".babelrc" copy {3}
+{
+  "presets": [],
+  "plugins": ["typewind/babel"]
+}
+```
+
+<Callout type="info">
+  Some frameworks like Vite have a different way of editting your babel plugin,
+  so make sure to take a look at their docs first.
+</Callout>
+
+2. **Add transformer**
+   <br />
+   Add the `typewind` transformers in your `tailwind.config.js`.
+
+```js /typewindTransforms/ filename="tailwind.config.js" copy
+const { typewindTransforms } = require('typewind/transform');
+
+/** @type {import('tailwindcss').Config} \*/
+module.exports = {
+  content: {
+    files: ['./src/**/*.{js,jsx,ts,tsx}'],
+    transform: typewindTransforms,
+  },
+};
+```

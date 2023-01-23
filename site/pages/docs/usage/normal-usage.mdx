@@ -1,0 +1,39 @@
+import { Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
+
+# Normal Usage
+
+All the utility classes provided by Tailwind are available in the `tw` proxy, and can be chained one after another. They can be found in the [Tailwind Docs](https://tailwindcss.com/docs/utility-first).
+
+<Callout type="info">
+  The hyphens(`-`) in the tailwind classes is replaced with an underscore(`_`)
+</Callout>
+
+```jsx
+import { tw } from 'typewind';
+
+export default function Button() {
+  return (
+    <button className={tw.bg_blue_500.text_white.rounded.py_3.px_4}>
+      Click Me
+    </button>
+  );
+}
+```
+
+<CodeOutput>
+  <button className="bg-blue-500 text-white rounded py-3 px-4">Click Me</button>
+</CodeOutput>
+
+<Callout type="info">
+  All the utility classes provided by Tailwind are available in the{' '}
+  <code>tw</code> proxy. They can be found in the [Tailwind
+  Docs](https://tailwindcss.com/docs/utility-first).
+</Callout>
+
+<Callout emoji="⚠️">
+  **Differences from Tailwind**: - For classes that have decimals or a `/` in
+  them, for eg. in `inset-1/2`, use the syntax for arbitrary values, like
+  `tw.inset_["1/2"]`. Read more about arbitrary values
+  [here](/docs/usage/arbitrary-values).
+</Callout>

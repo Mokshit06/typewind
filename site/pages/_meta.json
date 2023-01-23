@@ -1,0 +1,18 @@
+{
+  "index": {
+    "title": "Home",
+    "hidden": true,
+    "display": "hidden",
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "docs": {
+    "title": "Documentation",
+    "type": "page"
+  },
+  "about": {
+    "title": "About",
+    "type": "page"
+  }
+}

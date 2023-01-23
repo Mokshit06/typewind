@@ -1,0 +1,25 @@
+import { Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
+
+## Arbitrary Values
+
+You can also pass arbitrary values to the `tw` proxy using the same familiar `[]` syntax which tailwind provides us with.
+
+```jsx /text_['20px']/
+import { tw } from 'typewind';
+
+export default function App() {
+  return (
+    <button className={tw.text_['20px'].py_3.px_4.bg_blue_500}>Click Me</button>
+  );
+}
+```
+
+<CodeOutput>
+  <button className="bg-blue-500 text-[20px] py-3 px-4">Click Me</button>
+</CodeOutput>
+
+<Callout type="info">
+  For more reference, checkout the [Tailwind Docs for Arbitrary
+  Values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values).
+</Callout>
