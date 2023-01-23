@@ -1,5 +1,5 @@
 import React from 'react';
-import { DocsThemeConfig } from 'nextra-theme-docs';
+import { DocsThemeConfig, useConfig } from 'nextra-theme-docs';
 import { useRouter } from 'next/router';
 
 const config: DocsThemeConfig = {
@@ -31,6 +31,48 @@ const config: DocsThemeConfig = {
   nextThemes: {
     defaultTheme: 'dark',
     forcedTheme: 'dark',
+  },
+  head: () => {
+    const { frontMatter: meta } = useConfig();
+    const { title } = meta;
+
+    return (
+      <>
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link
+          rel="mask-icon"
+          href="/favicon/safari-pinned-tab.svg"
+          color="#000000"
+        />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta httpEquiv="Content-Language" content="en" />
+        <meta
+          name="description"
+          content={
+            meta.description ||
+            'The safety of Typescript with the magic of Tailwind.'
+          }
+        />
+        <meta
+          name="og:description"
+          content={
+            meta.description ||
+            'The safety of Typescript with the magic of Tailwind.'
+          }
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@mokshit06" />
+        <meta
+          name="og:title"
+          content={
+            title
+              ? title + ' – Typewind'
+              : 'Typewid - The safety of Typescript with the magic of Tailwind.'
+          }
+        />
+        <meta name="apple-mobile-web-app-title" content="Typewind" />
+      </>
+    );
   },
 };
 
