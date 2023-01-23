@@ -1,5 +1,6 @@
 import React from 'react';
 import { DocsThemeConfig } from 'nextra-theme-docs';
+import { useRouter } from 'next/router';
 
 const config: DocsThemeConfig = {
   logo: (
@@ -11,8 +12,15 @@ const config: DocsThemeConfig = {
     link: 'https://github.com/mokshit06/typewind',
   },
   useNextSeoProps() {
+    const { route } = useRouter();
+
+    if (route === '/')
+      return {
+        titleTemplate: 'Typewind – %s',
+      };
+
     return {
-      titleTemplate: '%s - Typewind',
+      titleTemplate: '%s – Typewind',
     };
   },
   docsRepositoryBase: 'https://github.com/mokshit06/typewind',
