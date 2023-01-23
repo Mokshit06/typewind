@@ -129,7 +129,11 @@ export async function generateTypes() {
   const root = rootTypeTemplate(
     [standard, arbitrary],
     ['Standard', 'Arbitrary'],
-    [...ctx.variantMap.keys()].map(fmtHyphen)
+    [...ctx.variantMap.keys()].map(s => {
+      s = /^\d/.test(s) ? `_${s}` : s;
+
+      return fmtHyphen(s);
+    })
   );
 
   fs.writeFileSync(
