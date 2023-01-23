@@ -5,7 +5,8 @@
   "type": "module",
   "keywords": [],
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "author": "",
   "license": "ISC",

@@ -7,7 +7,11 @@ module.exports = {
     transform: typewindTransforms,
   },
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#1FA5E9',
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 };
