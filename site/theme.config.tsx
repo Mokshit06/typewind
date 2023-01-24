@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 const config: DocsThemeConfig = {
   logo: (
     <span
-      className="text-base md:text-lg mx-2 font-extrabold hidden md:inline select-none"
+      className="text-base md:text-lg mx-2 font-extrabold inline select-none"
       style={{ fontFamily: 'IBM Plex Mono, monospace' }}
     >
       type

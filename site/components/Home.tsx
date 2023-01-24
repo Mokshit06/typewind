@@ -5,10 +5,8 @@ export default function Home() {
   return (
     <main className="my-6 max-w-[75rem] flex flex-col px-4 mx-auto items-center">
       <div className="w-full max-w-[53rem]">
-        <h1>
-          <span className="block text-center font-extrabold text-lg sm:text-xl md:text-6xl mt-12">
-            Bringing typesafety to Tailwind
-          </span>
+        <h1 className="block text-center font-extrabold text-4xl sm:text-5xl md:text-6xl mt-12">
+          Bringing typesafety to Tailwind
         </h1>
 
         <div className="mt-4">
@@ -68,7 +66,7 @@ export default function Home() {
       <video
         src="/preview.mov"
         style={{ filter: 'brightness(0.9) saturate(120%) contrast(95%)' }}
-        className="hidden md:block w-full shadow-2xl max-w-[60rem]"
+        className="block w-full shadow-2xl max-w-[60rem]"
         autoPlay
         loop
         muted
