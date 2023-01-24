@@ -1,6 +1,6 @@
 {
   "name": "typewind",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -33,16 +33,12 @@
     "@babel/core": "^7.20.12",
     "@babel/plugin-syntax-jsx": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
-    "esbuild-register": "^3.4.2",
     "eval": "^0.1.8",
-    "merge-deep": "^3.0.3",
     "prettier": "^2.8.3",
-    "tsup": "^6.5.0",
-    "twind": "^0.16.19"
+    "tsup": "^6.5.0"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.0",
-    "@types/merge-deep": "^3.0.0",
     "@types/prettier": "^2.7.2"
   }
 }
