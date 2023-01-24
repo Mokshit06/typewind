@@ -1,12 +1,18 @@
 {
   "name": "typewind",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "The safety of Typescript with the magic of Tailwind.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
+  "homepage": "https://typewind.vercel.app",
   "scripts": {
     "build": "tsup",
     "watch": "npm run build -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mokshit06/macaron.git",
+    "directory": "packages/typewind"
   },
   "bin": {
     "typewind": "dist/cli.js"
@@ -26,9 +32,15 @@
       "default": "./dist/transform.js"
     }
   },
-  "keywords": [],
+  "keywords": [
+    "typescript",
+    "tailwind",
+    "tailwindcss",
+    "babel-plugin",
+    "zero-runtime"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@babel/plugin-syntax-jsx": "^7.18.6",
