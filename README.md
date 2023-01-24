@@ -1,4 +1,4 @@
-<h1 align="center"><img src="https://raw.githubusercontent.com/mokshit06/typewind/main/.github/typewind-logo.png" /></h1>
+<h1 align="center"><img src="https://raw.githubusercontent.com/mokshit06/typewind/main/.github/typewind-logo.png" width="300px" /></h1>
 
 <p align="center">
   The <em>safety</em> of Typescript with the <em>magic</em> of Tailwind.
