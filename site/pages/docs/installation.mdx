@@ -31,6 +31,16 @@ npx typewind generate
   npm, or edit `tailwind.config.js`
 </Callout>
 
+It is recommended to set this as your `postinstall` script:-
+
+```json filename="package.json"
+{
+  "scripts": {
+    "postinstall": "typewind generate"
+  }
+}
+```
+
 ## Quick Start
 
 1. **Setup babel plugin**
