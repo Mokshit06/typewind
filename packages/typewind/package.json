@@ -1,6 +1,6 @@
 {
   "name": "typewind",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The safety of Typescript with the magic of Tailwind.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mokshit06/macaron.git",
+    "url": "https://github.com/mokshit06/typewind.git",
     "directory": "packages/typewind"
   },
   "bin": {
