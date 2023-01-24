@@ -4,8 +4,14 @@ import { useRouter } from 'next/router';
 
 const config: DocsThemeConfig = {
   logo: (
-    <span className="mx-2 font-extrabold hidden md:inline select-none">
-      Typewind
+    <span
+      className="text-base md:text-lg mx-2 font-extrabold hidden md:inline select-none"
+      style={{ fontFamily: 'IBM Plex Mono, monospace' }}
+    >
+      type
+      <span className="underline decoration-wavy decoration-red-500 text-white underline-offset-4">
+        wind
+      </span>
     </span>
   ),
   project: {
