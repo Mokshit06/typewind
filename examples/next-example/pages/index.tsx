@@ -25,6 +25,21 @@ export default function Home() {
             <h1 className={tw.text_2xl.font_bold.text_nextExamplePrimary}>
               Hello World
             </h1>
+            <ul>
+              {Array(5)
+                .fill(' ')
+                .map((_, i) => (
+                  <li
+                    key={i}
+                    className={
+                      tw.text_nextExamplePrimary['&:nth-child(3)'](tw.underline)
+                        .list_disc.mx_5
+                    }
+                  >
+                    Item {i}
+                  </li>
+                ))}
+            </ul>
             <p>
               This is an example vite app demonstrating the use of{' '}
               <a
