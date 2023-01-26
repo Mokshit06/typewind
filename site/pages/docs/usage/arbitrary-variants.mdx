@@ -1,0 +1,55 @@
+---
+title: Arbitrary Variants
+---
+
+import { Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
+
+## Arbitrary Variants
+
+Tailwind v3.1 released [support for Arbitrary Variants](https://tailwindcss.com/docs/hover-focus-and-other-states#using-arbitrary-variants).
+You can also pass arbitrary variants to the `tw` proxy using the same `[]` syntax as you use with arbitrary values... but the other way round.
+
+```jsx /text_['20px']/
+import { tw } from 'typewind';
+
+export default function App() {
+  return (
+    <ul>
+      {Array(5)
+        .fill(' ')
+        .map((_, i) => (
+          <li
+            key={i}
+            className={
+              tw['&:nth-child(3)'](tw.underline)
+                .list_disc.mx_5.text_white
+            }
+          >
+            Item {i}
+          </li>
+        ))}
+    </ul>
+  );
+}
+```
+
+<CodeOutput>
+  <ul>
+    {Array(5)
+      .fill(' ')
+      .map((_, i) => (
+        <li
+          key={i}
+          className="[&:nth-child(3)]:underline list-disc mx-5 text-white"
+        >
+          Item {i}
+        </li>
+      ))}
+  </ul>
+</CodeOutput>
+
+<Callout type="info">
+  For more reference, checkout the [Tailwind Docs for Arbitrary
+  Variants](https://tailwindcss.com/docs/hover-focus-and-other-states#using-arbitrary-variants).
+</Callout>
