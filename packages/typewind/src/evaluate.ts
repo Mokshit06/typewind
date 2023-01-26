@@ -1,7 +1,8 @@
 import { createTypewindContext } from './utils';
 const ctx = createTypewindContext();
-const { candidateRuleMap, variantMap } = ctx;
+const { candidateRuleMap, variantMap, getClassList } = ctx;
 const variants = [...variantMap.keys()];
+const classList = getClassList();
 
 function fmtArbitraryRule(name: string, value: string, candidateRuleMap: any) {
   const classes = [];
@@ -45,18 +46,27 @@ export const createTw: any = () => {
         // changes _ to -
         const name = fmt(p);
 
-        if (variants.includes(name)) {
-          return (arg: any) => {
-            for (const a of arg.toString().split(' ')) {
-              target.classes.add(`${name}:${a}`);
-            }
-            return thisTw;
-          };
-        }
         if (target.prevProp?.endsWith('-')) {
           target.classes.add(
             fmtArbitraryRule(target.prevProp.slice(0, -1), p, candidateRuleMap)
           );
+        } else if (!classList.includes(name)) {
+          if (variants.includes(name)) {
+            return (arg: any) => {
+              for (const a of arg.toString().split(' ')) {
+                target.classes.add(`${name}:${a}`);
+              }
+              return thisTw;
+            };
+          }
+
+          return (arg: any) => {
+            for (const a of arg.toString().split(' ')) {
+              target.classes.add(`[${name}]:${a}`);
+            }
+            return thisTw;
+          };
+
           // dont add a class if name ends with - because then value is in next prop
         } else if (!name.endsWith('-')) {
           target.classes.add(name);

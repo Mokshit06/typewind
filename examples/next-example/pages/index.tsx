@@ -22,14 +22,30 @@ export default function Home() {
             )}
           >
             {/* primary color is coming from tailwind.config.js */}
-            <h1 className={tw.text_2xl.font_bold.text_nextExamplePrimary}>
+            <h1 className={tw.text_2xl.font_bold.text_next_example_primary}>
               Hello World
             </h1>
+            <ul>
+              {Array(5)
+                .fill(' ')
+                .map((_, i) => (
+                  <li
+                    key={i}
+                    className={
+                      tw.text_next_example_primary['&:nth-child(3)'](
+                        tw.underline
+                      ).list_disc.mx_5
+                    }
+                  >
+                    Item {i}
+                  </li>
+                ))}
+            </ul>
             <p>
               This is an example vite app demonstrating the use of{' '}
               <a
                 href="//typewind.vercel.app"
-                className={tw.text_nextExamplePrimary.underline}
+                className={tw.text_next_example_primary.underline}
               >
                 Typewind
               </a>

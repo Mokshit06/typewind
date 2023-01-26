@@ -48,6 +48,8 @@ type Typewind = ${types.join(' & ')} & {
   ${modifiers
     .map((variant) => `${variant}(style: Property): Property`)
     .join(';')}
+} & {
+  [arbitraryVariant: string]: (style: Property) => Property;
 };
 
 declare const tw: Typewind;
