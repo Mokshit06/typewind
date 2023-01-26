@@ -4,7 +4,12 @@ import { createContext } from 'tailwindcss/lib/lib/setupContextUtils.js';
 import fs from 'fs';
 
 function getConfigPath() {
-  for (const configFile of ['./tailwind.config.js', './tailwind.config.cjs']) {
+  const pkg = require(path.join(process.cwd(), 'package.json'));
+  for (const configFile of [
+    './tailwind.config.js',
+    './tailwind.config.cjs',
+    pkg?.typewind?.configPath,
+  ]) {
     try {
       const configPath = path.join(process.cwd(), configFile);
       fs.accessSync(configPath);
@@ -12,7 +17,9 @@ function getConfigPath() {
     } catch (err) {}
   }
 
-  throw new Error('No tailwind config file found');
+  throw new Error(
+    'No tailwind config file found!\nIf your tailwind config file is not on the same folder, check: https://typewind.vercel.app/docs/installation/custom-config-file-path'
+  );
 }
 
 export function createTypewindContext() {

@@ -1,0 +1,16 @@
+---
+title: Custom Config File Path
+---
+
+## Custom Config File Path
+
+If you're using monorepo or your tailwind config file is just in another folder, you can use this feature to change the path
+
+You'll just need to add the following config to your `package.json` file.
+```json
+{
+    "typewind": {
+        "configPath": "./path/to/your/tailwind.config.cjs"
+    }
+}
+```
