@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       <main>
         <div
-          className={tw.h_screen.w_full.bg_gray_100.flex.justify_center.items_center.dark(
+          className={tw.h_screen.w_full.bg_gray_100.flex.flex_col.justify_center.items_center.dark(
             tw.bg_gray_800
           )}
         >
@@ -51,6 +51,12 @@ export default function Home() {
               </a>
               .
             </p>
+          </div>
+          <div className={tw.$container}>
+            <div className={tw.$lg(tw.underline)}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi,
+              non.
+            </div>
           </div>
         </div>
       </main>

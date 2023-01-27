@@ -1,0 +1,54 @@
+---
+title: Container Queries
+---
+
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
+
+## Container Queries
+
+[Container Queries](https://github.com/tailwindlabs/tailwindcss-container-queries) is a plugin for Tailwind v3.2+ that provides utilities for [container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries).
+Tailwind decided to use a new `@` suntax to differentiate it from media queries. In Typewind, just replace the `@` with `$` and you should be good to go!
+
+```jsx
+import { tw } from 'typewind';
+
+export default function App() {
+  return (
+    <div className={tw.$container}>
+      <div className={tw.$lg(tw.underline)}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, non.
+      </div>
+    </div>
+  );
+}
+```
+
+<Tabs items={['Code Output', 'Result']}>
+  <Tab>
+    ```tsx
+    <div className="@container">
+      <div className="@lg:underline">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, non.
+      </div>
+    </div>
+    ```
+  </Tab>
+  <Tab>
+    <CodeOutput>
+    <div className="@container">
+      <div className="@lg:underline">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, non.
+      </div>
+    </div>
+    </CodeOutput>
+  </Tab>
+</Tabs>
+
+
+<Callout type="info">
+  For any other plugin which uses `@` in the classes, use `$` instead.
+</Callout>
+<Callout type="info" emoji="⚠️">
+  Typewind does not support named container queries yet. If you would like to contribute, feel free to start a discussion on [Github](https://github.com/mokshit06/typewind).
+</Callout>
