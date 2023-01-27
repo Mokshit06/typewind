@@ -6,16 +6,20 @@ import prettier from 'prettier';
 import { createTypewindContext } from './utils';
 
 function createDoc(doc: string) {
-  return `
+  try {
+    return `
     * \`\`\`css
     * ${prettier
       .format(doc, { parser: 'css', tabWidth: 4 })
       .replace(/\n/g, '\n    *')}
     * \`\`\`
   `;
+  } catch (error) {
+    return doc;
+  }
 }
 
-const fmtHyphen = (s: string) => s.replace(/-/g, '_');
+const fmtToTypewind = (s: string) => s.replace(/-/g, '_').replace(/\@/, '$');
 
 const objectTemplate = (
   props: [prop: string, type: string, doc?: string][]
@@ -45,9 +49,7 @@ const rootTypeTemplate = (
 ${others.join('\n')}
 
 type Typewind = ${types.join(' & ')} & {
-  ${modifiers
-    .map((variant) => `${variant}(style: Property): Property`)
-    .join(';')}
+  ${modifiers.map(variant => `${variant}(style: Property): Property`).join(';')}
 } & {
   [arbitraryVariant: string]: (style: Property) => Property;
 };
@@ -80,13 +82,13 @@ function getCandidateItem(
 export async function generateTypes() {
   const ctx = createTypewindContext();
   const classList = (ctx.getClassList() as string[]).filter(
-    (s) => !s.startsWith('-')
+    s => !s.startsWith('-')
   );
 
-  const classesWithStandardSyntax = classList.filter((s) => !/\.|\//.test(s));
+  const classesWithStandardSyntax = classList.filter(s => !/\.|\//.test(s));
   const standard = typeTemplate(
     'Standard',
-    classesWithStandardSyntax.map((s) => {
+    classesWithStandardSyntax.map(s => {
       let { rule: rules, rest } = getCandidateItem(ctx.candidateRuleMap, s);
       let css = '';
 
@@ -106,20 +108,25 @@ export async function generateTypes() {
         }
       }
 
-      return [fmtHyphen(s), 'Property', css];
+      return [fmtToTypewind(s), 'Property', css];
     })
   );
   const candidates = [...ctx.candidateRuleMap.entries()];
   const arbitraryStyles: [string, string, string?][] = [];
   for (const [name, rules] of candidates) {
     for (const [rule, fn] of rules) {
-      if (!rule.options || !rule.options.values) continue;
-      const ident = fmtHyphen(name) + '_';
+      if (
+        !rule.options ||
+        !rule.options.values ||
+        Object.keys(rule.options.values).length == 0
+      )
+        continue;
+      const ident = fmtToTypewind(name) + '_';
 
       arbitraryStyles.push([
         ident,
         objectTemplate(
-          Object.keys(rule.options.values).map((val) => {
+          Object.keys(rule.options.values).map(val => {
             const [ruleSet] = fn(val, {});
 
             return [JSON.stringify(val), 'Property', fmtRuleToCss(ruleSet)];
@@ -135,10 +142,10 @@ export async function generateTypes() {
   const root = rootTypeTemplate(
     [standard, arbitrary],
     ['Standard', 'Arbitrary'],
-    [...ctx.variantMap.keys()].map((s) => {
+    [...ctx.variantMap.keys()].map(s => {
       s = /^\d/.test(s) ? `_${s}` : s;
 
-      return fmtHyphen(s);
+      return fmtToTypewind(s);
     })
   );
 
@@ -154,7 +161,7 @@ function fmtRuleset(rule: any) {
     '{' +
     Object.entries(rule)
       .map(([prop, value]): any => {
-        if (!value) return prop;
+        if (!value) return '';
         if (typeof value === 'object') return `${prop} ${fmtRuleset(value)}`;
 
         return `${prop}: ${value}`;
@@ -183,7 +190,7 @@ function fmtRuleToCss(ruleSet: any) {
   return `${selector} ${fmtRuleset(ruleSet[selector])}`;
 }
 
-generateTypes().catch((err) => {
+generateTypes().catch(err => {
   console.error(err);
   process.exit(1);
 });

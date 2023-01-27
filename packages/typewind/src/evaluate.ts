@@ -19,7 +19,7 @@ function fmtArbitraryRule(name: string, value: string, candidateRuleMap: any) {
   return classes.join(' ');
 }
 
-const fmt = (s: string) => s.replace(/_/g, '-');
+const fmtToTailwind = (s: string) => s.replace(/_/g, '-').replace(/\$/, '@');
 
 export const createTw: any = () => {
   const twUsed = (classes = new Set<string>()) => {
@@ -44,7 +44,7 @@ export const createTw: any = () => {
         if (typeof p !== 'string') return null;
 
         // changes _ to -
-        const name = fmt(p);
+        const name = fmtToTailwind(p);
 
         if (target.prevProp?.endsWith('-')) {
           target.classes.add(
