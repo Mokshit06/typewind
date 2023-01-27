@@ -2,7 +2,7 @@
 title: Usage
 ---
 
-import { Callout } from 'nextra-theme-docs';
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
 import { CodeOutput } from '../../components/CodeOutput';
 
 # Usage
@@ -15,7 +15,7 @@ import { tw } from 'typewind';
 export default function App() {
   return (
     <div
-      className={tw.flex.items_center.justify_center.h_screen.bg_white.text_black.dark(
+      className={tw.flex.items_center.justify_center.h_["5em"].bg_white.text_black.dark(
         tw.bg_black.text_white
       )}
     >
@@ -26,3 +26,29 @@ export default function App() {
   );
 }
 ```
+
+<Tabs items={['Code Output', 'Result']}>
+  <Tab>
+    ```jsx
+    <div
+      className="flex items-center justify-center h-[5em] bg-white text-black dark:bg-black dark:text-white"
+    >
+      <h1 className="text-xl sm:text-3xl md:text-4xl font-bold">
+        Hello World
+      </h1>
+    </div>
+    ```
+  </Tab>
+  <Tab>
+    <CodeOutput>
+      <div
+        className="flex items-center justify-center h-[5em] bg-white text-black dark:bg-black dark:text-white"
+      >
+        <h1 className="text-xl sm:text-3xl md:text-4xl font-bold">
+          Hello World
+        </h1>
+      </div>
+    </CodeOutput>
+  </Tab>
+</Tabs>
+

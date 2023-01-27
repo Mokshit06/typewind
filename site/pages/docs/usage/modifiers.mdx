@@ -2,7 +2,7 @@
 title: Modifiers
 ---
 
-import { Callout } from 'nextra-theme-docs';
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
 import { CodeOutput } from '../../../components/CodeOutput';
 
 ## Modifiers
@@ -29,11 +29,22 @@ export default function Button() {
 }
 ```
 
-<CodeOutput>
-  <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-3 md:py-4 dark:bg-sky-900 dark:hover:bg-sky-800">
-    Click Me
-  </button>
-</CodeOutput>
+<Tabs items={['Code Output', 'Result']}>
+  <Tab>
+    ```tsx
+    <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-5 md:py-5 dark:bg-sky-900 dark:hover:bg-sky-800">
+      Click Me
+    </button>
+    ```
+  </Tab>
+  <Tab>
+    <CodeOutput>
+      <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-4 md:py-5 dark:bg-sky-900 dark:hover:bg-sky-800">
+        Click Me
+      </button>
+    </CodeOutput>
+  </Tab>
+</Tabs>
 
 <Callout type="info">
   For more reference, checkout the Tailwind docs for [Handling Hover, Focus, and

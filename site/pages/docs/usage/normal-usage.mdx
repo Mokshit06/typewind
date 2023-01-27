@@ -2,7 +2,7 @@
 title: Normal Usage
 ---
 
-import { Callout } from 'nextra-theme-docs';
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
 import { CodeOutput } from '../../../components/CodeOutput';
 
 # Normal Usage
@@ -25,9 +25,18 @@ export default function Button() {
 }
 ```
 
-<CodeOutput>
-  <button className="bg-blue-500 text-white rounded py-3 px-4">Click Me</button>
-</CodeOutput>
+<Tabs items={['Code Output', 'Result']}>
+  <Tab>
+    ```jsx
+    <button className="bg-blue-500 text-white rounded py-3 px-4">Click Me</button>
+    ```
+  </Tab>
+  <Tab>
+    <CodeOutput>
+      <button className="bg-blue-500 text-white rounded py-3 px-4">Click Me</button>
+    </CodeOutput>
+  </Tab>
+</Tabs>
 
 <Callout type="info">
   All the utility classes provided by Tailwind are available in the{' '}

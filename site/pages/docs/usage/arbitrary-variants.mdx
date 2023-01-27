@@ -2,7 +2,7 @@
 title: Arbitrary Variants
 ---
 
-import { Callout } from 'nextra-theme-docs';
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
 import { CodeOutput } from '../../../components/CodeOutput';
 
 ## Arbitrary Variants
@@ -34,20 +34,41 @@ export default function App() {
 }
 ```
 
-<CodeOutput>
-  <ul>
-    {Array(5)
-      .fill(' ')
-      .map((_, i) => (
-        <li
-          key={i}
-          className="[&:nth-child(3)]:underline list-disc mx-5 text-white"
-        >
-          Item {i}
-        </li>
-      ))}
-  </ul>
-</CodeOutput>
+<Tabs items={['Code Output', 'Result']}>
+  <Tab>
+    ```tsx
+    <ul>
+      {Array(5)
+        .fill(' ')
+        .map((_, i) => (
+          <li
+            key={i}
+            className="[&:nth-child(3)]:underline list-disc mx-5 text-white"
+          >
+            Item {i}
+          </li>
+        ))}
+    </ul>
+    ```
+  </Tab>
+  <Tab>
+    <CodeOutput>
+      <ul>
+        {Array(5)
+          .fill(' ')
+          .map((_, i) => (
+            <li
+              key={i}
+              className="[&:nth-child(3)]:underline list-disc mx-5 text-white"
+            >
+              Item {i}
+            </li>
+          ))}
+      </ul>
+    </CodeOutput>
+  </Tab>
+</Tabs>
+
 
 <Callout type="info">
   For more reference, checkout the [Tailwind Docs for Arbitrary

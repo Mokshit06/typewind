@@ -2,7 +2,7 @@
 title: Arbitrary Values
 ---
 
-import { Callout } from 'nextra-theme-docs';
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
 import { CodeOutput } from '../../../components/CodeOutput';
 
 ## Arbitrary Values
@@ -19,9 +19,18 @@ export default function App() {
 }
 ```
 
-<CodeOutput>
-  <button className="bg-blue-500 text-[20px] py-3 px-4">Click Me</button>
-</CodeOutput>
+<Tabs items={['Code Output', 'Result']}>
+  <Tab>
+    ```tsx
+    <button className="text-[20px] py-3 px-4 bg-blue-500">Click Me</button>
+    ```
+  </Tab>
+  <Tab>
+    <CodeOutput>
+      <button className="text-[20px] py-3 px-4 bg-blue-500">Click Me</button>
+    </CodeOutput>
+  </Tab>
+</Tabs>
 
 <Callout type="info">
   For more reference, checkout the [Tailwind Docs for Arbitrary
