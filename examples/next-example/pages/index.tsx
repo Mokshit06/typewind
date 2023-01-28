@@ -22,7 +22,13 @@ export default function Home() {
             )}
           >
             {/* primary color is coming from tailwind.config.js */}
-            <h1 className={tw.text_2xl.font_bold.text_next_example_primary}>
+            <h1
+              className={
+                tw.text_2xl.font_bold.text_next_example_primary.text_[
+                '#f66666'
+                ]
+              }
+            >
               Hello World
             </h1>
             <ul>

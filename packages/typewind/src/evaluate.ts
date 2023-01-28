@@ -50,25 +50,27 @@ export const createTw: any = () => {
           target.classes.add(
             fmtArbitraryRule(target.prevProp.slice(0, -1), p, candidateRuleMap)
           );
-        } else if (!classList.includes(name)) {
-          if (variants.includes(name)) {
+        } else if (!name.endsWith('-')) {
+          if (!classList.includes(name)) {
+            if (variants.includes(name)) {
+              return (arg: any) => {
+                for (const a of arg.toString().split(' ')) {
+                  console.log(`${name}:${a}`);
+                  target.classes.add(`${name}:${a}`);
+                }
+                return thisTw;
+              };
+            }
+
             return (arg: any) => {
               for (const a of arg.toString().split(' ')) {
-                target.classes.add(`${name}:${a}`);
+                target.classes.add(`[${name}]:${a}`);
               }
               return thisTw;
             };
+
+            // dont add a class if name ends with - because then value is in next prop
           }
-
-          return (arg: any) => {
-            for (const a of arg.toString().split(' ')) {
-              target.classes.add(`[${name}]:${a}`);
-            }
-            return thisTw;
-          };
-
-          // dont add a class if name ends with - because then value is in next prop
-        } else if (!name.endsWith('-')) {
           target.classes.add(name);
         }
 
