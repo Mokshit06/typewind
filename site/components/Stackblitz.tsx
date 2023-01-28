@@ -8,7 +8,7 @@ const fileMap = {
 
 export function Stackblitz({ example }: { example: keyof typeof fileMap }) {
   return (
-    <div className="relative">
+    <div className={tw.relative}>
       <iframe
         src={`https://stackblitz.com/github/mokshit06/typewind/tree/main/examples/${example}-example?embed=1&file=${fileMap[example]}`}
         className={
