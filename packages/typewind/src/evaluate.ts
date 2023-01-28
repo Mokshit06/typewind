@@ -55,7 +55,6 @@ export const createTw: any = () => {
             if (variants.includes(name)) {
               return (arg: any) => {
                 for (const a of arg.toString().split(' ')) {
-                  console.log(`${name}:${a}`);
                   target.classes.add(`${name}:${a}`);
                 }
                 return thisTw;
