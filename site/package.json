@@ -14,6 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vercel/analytics": "^0.1.8",
     "date-fns": "^2.29.3",
     "micromark-extension-mdxjs-esm": "^1.0.3",
     "next": "^13.0.6",

@@ -2,6 +2,7 @@ import '../styles.css';
 import 'nextra-theme-docs/style.css';
 import Script from 'next/script';
 import Head from 'next/head';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function Nextra({ Component, pageProps }) {
   const getLayout = Component.getLayout || (page => page);
@@ -21,6 +22,7 @@ export default function Nextra({ Component, pageProps }) {
       </Head>
       <Script src="https://platform.twitter.com/widgets.js" />
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
