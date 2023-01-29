@@ -47,7 +47,6 @@ export default function Home() {
             .my_6.text_lg.w_full
         }
       >
-        {/* "focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 py-3 rounded-lg w-full justify-center sm:w-auto bg-sky-500 highlight-white/20 hover:bg-sky-400 flex gap-x-2 items-center" */}
         <Link
           href="/docs"
           className={
