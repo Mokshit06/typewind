@@ -42,8 +42,8 @@ export const Features = () => {
           tailwind, and provide autocomplete for all the classes from{' '}
           <code
             className={
-              tw.bg_black.text_sm.py_['0.5'].px_['-0.25rem'].border
-                .border_white['/30'].rounded.text_gray_400
+              tw.bg_black.text_sm.py_['0.5'].px_['-0.25rem'].border.rounded
+                .text_gray_400
             }
           >
             tailwind.config.js
@@ -59,8 +59,8 @@ export const Features = () => {
           Type definitions of{' '}
           <code
             className={
-              tw.bg_black.text_sm.py_['0.5'].px_['-0.25rem'].border
-                .border_white['/30'].rounded.text_gray_400
+              tw.bg_black.text_sm.py_['0.5'].px_['-0.25rem'].border.rounded
+                .text_gray_400
             }
           >
             tw
