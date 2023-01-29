@@ -6,9 +6,9 @@ import fs from 'fs';
 function getConfigPath() {
   const pkg = require(path.join(process.cwd(), 'package.json'));
   for (const configFile of [
+    pkg?.typewind?.configPath,
     './tailwind.config.js',
     './tailwind.config.cjs',
-    pkg?.typewind?.configPath,
   ]) {
     try {
       const configPath = path.join(process.cwd(), configFile);
