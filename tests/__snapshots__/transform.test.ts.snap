@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transformBabel should work with arbitrary-values 1`] = `
+"import { tw } from 'typewind';
+export default function Button() {
+  return <button className={"text-[20px]"}>Click Me</button>;
+}"
+`;
+
+exports[`transformBabel should work with arbitrary-variants 1`] = `
+"import { tw } from 'typewind';
+export default function Button() {
+  return <button className={"[&:nth-child(3)]:underline"}>Click Me</button>;
+}"
+`;
+
+exports[`transformBabel should work with container-queries 1`] = `
+"import { tw } from 'typewind';
+export default function App() {
+  return <div className={"@container"}>
+      <div className={"@lg:underline"}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, non.
+      </div>
+    </div>;
+}"
+`;
+
+exports[`transformBabel should work with modifiers 1`] = `
+"import { tw } from 'typewind';
+export default function Button() {
+  return <button className={"bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 [lu]:py-4 [lu]:px-5 dark:bg-sky-900 dark:hover:bg-sky-800"}>
+      Click Me
+    </button>;
+}"
+`;
+
+exports[`transformBabel should work with normal-usage 1`] = `
+"import { tw } from 'typewind';
+import './index.css';
+export default function App() {
+  return <div className={"h-screen w-full bg-gray-800 flex justify-center items-center"}>
+      <p className={"text-white"}>Hello World!</p>
+    </div>;
+}"
+`;

@@ -1,7 +1,7 @@
 import * as babel from '@babel/core';
 import { TransformerFn } from 'tailwindcss/types/config';
 
-function transformBabel(ext: string, content: string) {
+export const transformBabel = (ext: string, content: string) => {
   const config: babel.TransformOptions = {
     filename: `typewind.${ext}`,
     plugins: ['typewind/babel'],
