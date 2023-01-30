@@ -27,7 +27,7 @@ const objectTemplate = (
   return `{${props
     .map(
       ([prop, type, doc]) =>
-        `/** ${doc ? createDoc(doc) : ''} */ ${prop}: ${type};`
+        `/** ${doc ? createDoc(doc) : ''} */ ${JSON.stringify(prop)}: ${type};`
     )
     .join('\n')}}`;
 };
