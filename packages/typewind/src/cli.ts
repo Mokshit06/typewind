@@ -156,7 +156,7 @@ export async function generateTypes() {
   const root = rootTypeTemplate(
     [standard, arbitrary],
     ['Standard', 'Arbitrary'],
-    [...ctx.variantMap.keys()].map(s => {
+    [...ctx.variantMap.keys(), 'important'].map(s => {
       s = /^\d/.test(s) ? `_${s}` : s;
 
       return fmtToTypewind(s);
