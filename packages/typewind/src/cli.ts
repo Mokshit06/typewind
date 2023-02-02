@@ -3,17 +3,31 @@
 import fs from 'fs';
 import path from 'path';
 import prettier from 'prettier';
-import { createTypewindContext } from './utils';
+import { createTypewindContext, loadConfig } from './utils';
 
 function createDoc(doc: string) {
   try {
-    return `
+    let cssDoc = `
     * \`\`\`css
     * ${prettier
       .format(doc, { parser: 'css', tabWidth: 4 })
       .replace(/\n/g, '\n    *')}
     * \`\`\`
   `;
+    const config = loadConfig();
+    if (config.showPixelEquivalents) {
+      const remMatch = doc.match(/-?[0-9.]+rem/g);
+      const pxValue = config.rootFontSize;
+      if (remMatch) {
+        cssDoc = cssDoc.replace(
+          /(-?[0-9.]+)rem/g,
+          // There is a zero-width space between * and / in the closing comment
+          // without which typescript closes the tsdoc comment
+          (match, p1) => `${match} /* ${parseFloat(p1) * pxValue}px *​/`
+        );
+      }
+    }
+    return cssDoc;
   } catch (error) {
     return doc;
   }
@@ -129,7 +143,7 @@ export async function generateTypes() {
           Object.keys(rule.options.values).map(val => {
             const [ruleSet] = fn(val, {});
 
-            return [JSON.stringify(val), 'Property', fmtRuleToCss(ruleSet)];
+            return [val, 'Property', fmtRuleToCss(ruleSet)];
           })
         ) + ' & Record<string, Property>',
         undefined,

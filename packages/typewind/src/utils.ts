@@ -3,10 +3,26 @@ import resolveConfig from 'tailwindcss/resolveConfig.js';
 import { createContext } from 'tailwindcss/lib/lib/setupContextUtils.js';
 import fs from 'fs';
 
-function getConfigPath() {
+export function loadConfig(): {
+  configPath: string;
+  showPixelEquivalents: boolean;
+  rootFontSize: number;
+} {
   const pkg = require(path.join(process.cwd(), 'package.json'));
+
+  return {
+    configPath: './tailwind.config.js',
+    showPixelEquivalents: false,
+    rootFontSize: 16,
+    ...pkg?.typewind,
+  };
+}
+
+function getConfigPath() {
+  const config = loadConfig();
+
   for (const configFile of [
-    pkg?.typewind?.configPath,
+    config.configPath,
     './tailwind.config.js',
     './tailwind.config.cjs',
   ]) {
