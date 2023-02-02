@@ -1,6 +1,7 @@
 {
   "index": "Introduction",
-  "setup": "Setup",
+  "installation": "Installation",
   "usage": "Usage",
-  "examples": "Examples"
+  "examples": "Examples",
+  "configuration": "Configuration"
 }
