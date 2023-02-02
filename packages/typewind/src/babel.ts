@@ -36,10 +36,7 @@ export default function headingBabelPlugin(): PluginObj<
           curPath = curPath.parentPath!;
         }
 
-        console.log(prevPath.parent.type);
         const code: string = generator(prevPath.node).code;
-
-        console.log(code);
 
         const { result } = _eval(
           `
