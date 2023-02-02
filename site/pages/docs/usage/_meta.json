@@ -1,6 +1,7 @@
 {
   "normal-usage": "Normal Usage",
   "modifiers": "Modifiers",
+  "important-modifier": "Important Modifier",
   "arbitrary-values": "Arbitrary Values",
   "arbitrary-variants": "Arbitrary Variants",
   "container-queries": "Container Queries"
