@@ -43,3 +43,11 @@ export default function App() {
     </div>;
 }"
 `;
+
+exports[`transformBabel works with transform 1`] = `
+"import { tw } from 'typewind';
+export default function Button() {
+  console.log("text-red-100");
+  return <button className={"text-red-100"}>Click Me</button>;
+}"
+`;
