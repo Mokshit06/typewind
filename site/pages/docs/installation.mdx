@@ -74,3 +74,14 @@ module.exports = {
   },
 };
 ```
+
+3. **Edit tsconfig.json**
+   <br />
+   This is optional, but we recommend you do this to fix [this issue](https://twitter.com/Mokshit06/status/1620812678687248384).
+```json filename="tsconfig.json"
+{
+  "compilerOptions": {
+    "noPropertyAccessFromIndexSignature": true,
+  }
+}
+```
