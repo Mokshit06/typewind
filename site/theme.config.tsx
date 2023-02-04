@@ -1,15 +1,23 @@
 import React from 'react';
 import { DocsThemeConfig, useConfig } from 'nextra-theme-docs';
 import { useRouter } from 'next/router';
+import { tw } from 'typewind';
 
 const config: DocsThemeConfig = {
   logo: (
     <span
-      className="text-base md:text-lg mx-2 font-extrabold inline select-none"
+      className={
+        tw.text_base.md(tw.text_lg).mx_2.font_extrabold.inline.select_none
+      }
       style={{ fontFamily: 'IBM Plex Mono, monospace' }}
     >
       type
-      <span className="underline decoration-wavy decoration-red-500 text-white underline-offset-4">
+      <span
+        className={
+          tw.underline.decoration_wavy.decoration_red_500.text_white
+            .underline_offset_4
+        }
+      >
         wind
       </span>
     </span>
@@ -55,14 +63,14 @@ const config: DocsThemeConfig = {
         <meta
           name="description"
           content={
-            meta.description ||
+            meta['description'] ||
             'The safety of Typescript with the magic of Tailwind.'
           }
         />
         <meta
           name="og:description"
           content={
-            meta.description ||
+            meta['description'] ||
             'The safety of Typescript with the magic of Tailwind.'
           }
         />

@@ -1,8 +1,9 @@
 import { FiCode } from 'react-icons/fi';
 import { SiTailwindcss, SiTypescript } from 'react-icons/si';
-import { MdExtensionOff, MdExposureZero } from 'react-icons/md';
+import { MdExtensionOff } from 'react-icons/md';
 import { RiSettingsFill } from 'react-icons/ri';
 import { CiFolderOff } from 'react-icons/ci';
+import { tw } from 'typewind';
 
 type FeatureCardProps = {
   icon: React.ReactNode;
@@ -39,7 +40,12 @@ export const Features = () => {
         <>
           Using TS intellisense, Typewind is able to provide type safety to
           tailwind, and provide autocomplete for all the classes from{' '}
-          <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
+          <code
+            className={
+              tw.bg_black.text_sm.py_['0.5'].px_['.25rem'].rounded.text_gray_400
+                .border.border_['rgba(255,255,255,0.3)']
+            }
+          >
             tailwind.config.js
           </code>
         </>
@@ -51,7 +57,12 @@ export const Features = () => {
       description: (
         <>
           Type definitions of{' '}
-          <code className="bg-black text-sm py-0.5 px-[.25em] border border-white/30 rounded text-gray-400">
+          <code
+            className={
+              tw.bg_black.text_sm.py_['0.5'].px_['.25rem'].rounded.text_gray_400
+                .border.border_['rgba(255,255,255,0.3)']
+            }
+          >
             tw
           </code>{' '}
           are generated from your `tailwind.config.js`, and also creates types
@@ -81,13 +92,22 @@ export const Features = () => {
       ),
     },
   ];
+
   return (
-    <div className="w-full min-h-[600px] py-16 md:pt-20">
-      <h2 className="font-bold text-2xl lg:text-3xl xl:text-4xl text-center">
+    <div className={tw.w_full.min_h_['600px'].py_16.md(tw.pt_20)}>
+      <h2
+        className={tw.font_bold.text_2xl.text_center
+          .lg(tw.text_3xl)
+          .xl(tw.text_4xl)}
+      >
         Why Typewind?
       </h2>
-      <div className="mx-auto lg:max-w-8xl mt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-8 lg:gap-y-12">
+      <div className={tw.mx_auto.mt_12}>
+        <div
+          className={tw.grid.grid_cols_1.gap_x_6.gap_y_8
+            .sm(tw.grid_cols_2)
+            .lg(tw.grid_cols_3.gap_x_8.gap_y_12)}
+        >
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}
@@ -99,12 +119,20 @@ export const Features = () => {
 
 const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 flex flex-col">
-      <div className="flex items-center justify-center h-16 w-16 rounded-full bg-sky-500">
+    <div
+      className={
+        tw.bg_neutral_900.border.border_neutral_800.rounded_lg.p_8.flex.flex_col
+      }
+    >
+      <div
+        className={
+          tw.flex.items_center.justify_center.h_16.w_16.rounded_full.bg_sky_500
+        }
+      >
         {icon}
       </div>
-      <h3 className="text-lg font-semibold text-gray-100 mt-4">{title}</h3>
-      <p className="text-gray-400 mt-2">{description}</p>
+      <h3 className={tw.text_lg.font_semibold.text_gray_100.mt_4}>{title}</h3>
+      <p className={tw.text_gray_400.mt_2}>{description}</p>
     </div>
   );
 };
