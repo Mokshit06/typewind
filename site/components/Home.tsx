@@ -11,21 +11,18 @@ export default function Home() {
     >
       <div className={tw.w_full.max_w_['53rem']}>
         <h1
-          className={
-            tw.block.text_center.font_extrabold.text_['4xl']
-              .sm(tw.text_['5xl'])
-              .md(tw.text_6xl).mt_12
-          }
+          className={tw.block.text_center.font_extrabold.text_4xl.mt_12
+            .sm(tw.text_5xl)
+            .md(tw.text_6xl)}
         >
           Bringing typesafety to Tailwind
         </h1>
 
         <div className={tw.mt_4}>
           <p
-            className={
-              tw.text_xl.font_medium.text_gray_400.md(tw.text_xl).mx_auto
-                .max_w_full.w_['880px'].text_center.px_4
-            }
+            className={tw.text_xl.mb_2.font_medium.text_gray_400.mx_auto.max_w_full.text_center.px_4
+              .sm(tw.text_lg)
+              .w_['880px'].md(tw.important(tw.text_xl))}
           >
             Introducing Typewind, the magic of Tailwind combined with the{' '}
             <span
@@ -42,24 +39,19 @@ export default function Home() {
       </div>
 
       <div
-        className={
-          tw.flex.flex_col.justify_center.items_center.sm(tw.flex_row).gap_4
-            .my_6.text_lg.w_full
-        }
+        className={tw.flex.flex_col.justify_center.items_center.gap_4.my_6.text_lg.w_full.sm(
+          tw.flex_row
+        )}
       >
         <Link
           href="/docs"
-          className={
-            tw
-              .focus(
-                tw.outline_none.ring_2.ring_slate_400.ring_offset_2
-                  .ring_offset_slate_50
-              )
-              .text_white.font_semibold.h_12.px_6.py_3.rounded_lg.w_full.justify_center.sm(
-                tw.w_auto
-              )
-              .bg_sky_500.hover(tw.bg_sky_400).flex.gap_x_2.items_center
-          }
+          className={tw.text_white.font_semibold.h_12.px_6.py_3.rounded_lg.w_full.justify_center.bg_sky_500.flex.gap_x_2.items_center
+            .focus(
+              tw.outline_none.ring_2.ring_slate_400.ring_offset_2
+                .ring_offset_slate_50
+            )
+            .sm(tw.w_auto)
+            .hover(tw.bg_sky_400)}
         >
           Get Started
           <svg
@@ -78,12 +70,10 @@ export default function Home() {
           </svg>
         </Link>
         <a
-          className={tw
+          className={tw.text_white.font_semibold.h_12.px_6.py_3.rounded_lg.w_full.flex.items_center.justify_center.gap_2.bg_gray_800
             .focus(tw.outline_none.ring_2.ring_slate_400.ring_offset_2)
-            .text_white.font_semibold.h_12.px_6.py_3.rounded_lg.w_full.flex.items_center.justify_center.gap_2.sm(
-              tw.w_auto
-            )
-            .bg_gray_800.hover(tw.bg_gray_700)}
+            .sm(tw.w_auto)
+            .hover(tw.bg_gray_700)}
           target="_blank"
           rel="noreferrer"
           href="//github.com/mokshit06/typewind"

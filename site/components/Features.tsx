@@ -42,8 +42,8 @@ export const Features = () => {
           tailwind, and provide autocomplete for all the classes from{' '}
           <code
             className={
-              tw.bg_black.text_sm.py_['0.5'].px_['-0.25rem'].border.rounded
-                .text_gray_400
+              tw.bg_black.text_sm.py_['0.5'].px_['.25rem'].rounded.text_gray_400
+                .border.border_['rgba(255,255,255,0.3)']
             }
           >
             tailwind.config.js
@@ -59,8 +59,8 @@ export const Features = () => {
           Type definitions of{' '}
           <code
             className={
-              tw.bg_black.text_sm.py_['0.5'].px_['-0.25rem'].border.rounded
-                .text_gray_400
+              tw.bg_black.text_sm.py_['0.5'].px_['.25rem'].rounded.text_gray_400
+                .border.border_['rgba(255,255,255,0.3)']
             }
           >
             tw
@@ -96,19 +96,17 @@ export const Features = () => {
   return (
     <div className={tw.w_full.min_h_['600px'].py_16.md(tw.pt_20)}>
       <h2
-        className={
-          tw.font_bold.text_2xl.lg(tw.text_3xl).xl(tw.text_4xl).text_center
-        }
+        className={tw.font_bold.text_2xl.text_center
+          .lg(tw.text_3xl)
+          .xl(tw.text_4xl)}
       >
         Why Typewind?
       </h2>
-      <div className={tw.mx_auto.lg(tw.max_w_7xl).mt_12}>
+      <div className={tw.mx_auto.mt_12}>
         <div
-          className={
-            tw.grid.grid_cols_1
-              .sm(tw.grid_cols_2)
-              .lg(tw.grid_cols_3.gap_x_8.gap_y_12).gap_x_6.gap_y_8
-          }
+          className={tw.grid.grid_cols_1.gap_x_6.gap_y_8
+            .sm(tw.grid_cols_2)
+            .lg(tw.grid_cols_3.gap_x_8.gap_y_12)}
         >
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />

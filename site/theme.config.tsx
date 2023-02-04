@@ -15,7 +15,7 @@ const config: DocsThemeConfig = {
       <span
         className={
           tw.underline.decoration_wavy.decoration_red_500.text_white
-            .underline_offset_1
+            .underline_offset_4
         }
       >
         wind
