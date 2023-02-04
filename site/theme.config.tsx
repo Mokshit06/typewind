@@ -63,14 +63,14 @@ const config: DocsThemeConfig = {
         <meta
           name="description"
           content={
-            meta.description ||
+            meta['description'] ||
             'The safety of Typescript with the magic of Tailwind.'
           }
         />
         <meta
           name="og:description"
           content={
-            meta.description ||
+            meta['description'] ||
             'The safety of Typescript with the magic of Tailwind.'
           }
         />
