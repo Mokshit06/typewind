@@ -13,7 +13,7 @@ export default function Home() {
         <h1
           className={
             tw.block.text_center.font_extrabold.text_['4xl']
-              .sm(tw.text['5xl'])
+              .sm(tw.text_['5xl'])
               .md(tw.text_6xl).mt_12
           }
         >

@@ -23,7 +23,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
-    "typewind": "^0.0.8"
+    "typewind": "^0.0.15"
   },
   "devDependencies": {
     "@types/node": "18.11.10",
