@@ -42,12 +42,18 @@ export default function headingBabelPlugin(): PluginObj<
           `
 const { createTw } = require("typewind/dist/evaluate.js");
 const tw = createTw();
-let result$$ = ${code};
-if (typeof result$$ === 'function') {
-  console.log(result$$.toString())
-  throw new Error("Error in evaluating typewind expression")
-} else {
-  exports.result = result$$.toString();
+try {
+  let result$$ = ${code};
+  if (typeof result$$ === 'function' || typeof result$$ === "undefined") {
+    throw new Error()
+  } else {
+    exports.result = result$$.toString();
+  }
+} catch (error) {
+  throw new Error(\`Error in evaluating typewind expression: ${code.replace(
+    '`',
+    '\\`'
+  )}\`)
 }
 `,
           true
