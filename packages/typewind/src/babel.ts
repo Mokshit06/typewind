@@ -1,18 +1,7 @@
-import {
-  NodePath,
-  PluginObj,
-  PluginPass,
-  types as t,
-  Visitor,
-} from '@babel/core';
+import { NodePath, PluginObj, PluginPass, types as t } from '@babel/core';
 import _eval from 'eval';
-import path from 'path';
 import { createTypewindContext } from './utils';
 import generator from '@babel/generator';
-
-function fmt(str: string) {
-  return str.replace(/_/g, '-');
-}
 
 export default function headingBabelPlugin(): PluginObj<
   PluginPass & { classes: string[] }
@@ -29,8 +18,8 @@ export default function headingBabelPlugin(): PluginObj<
       MemberExpression(path, state) {
         if (
           !t.isIdentifier(path.node.object) ||
-          path.node.object.name !== 'tw' ||
-          !t.isIdentifier(path.node.property)
+          path.node.object.name !== 'tw'
+          // !t.isIdentifier(path.node.property)
         )
           return;
 
@@ -40,17 +29,12 @@ export default function headingBabelPlugin(): PluginObj<
         while (
           curPath &&
           (t.isMemberExpression(curPath.node) ||
-            t.isCallExpression(curPath.node))
+            (t.isCallExpression(curPath.node) &&
+              (prevPath == undefined || prevPath.node == curPath.node.callee)))
         ) {
           prevPath = curPath!;
           curPath = curPath.parentPath!;
         }
-
-        if (
-          t.isCallExpression(prevPath.parent) ||
-          t.isMemberExpression(prevPath.parent)
-        )
-          return;
 
         const code: string = generator(prevPath.node).code;
 
@@ -58,12 +42,17 @@ export default function headingBabelPlugin(): PluginObj<
           `
 const { createTw } = require("typewind/dist/evaluate.js");
 const tw = createTw();
-exports.result = ${code}.toString()
+let result$$ = ${code};
+if (typeof result$$ === 'function') {
+  console.log(result$$.toString())
+  throw new Error("Error in evaluating typewind expression")
+} else {
+  exports.result = result$$.toString();
+}
 `,
           true
         ) as { result: string };
 
-        // console.log(prevPath.node, [...nodesReplaced][0]);
         if (prevPath.node && !t.isStringLiteral(prevPath.node)) {
           nodesReplaced.add(prevPath.node);
           // ignore this 👍

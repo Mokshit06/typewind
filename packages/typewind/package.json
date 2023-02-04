@@ -1,13 +1,14 @@
 {
   "name": "typewind",
-  "version": "0.0.8",
+  "version": "0.0.13",
   "description": "The safety of Typescript with the magic of Tailwind.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "homepage": "https://typewind.vercel.app",
   "scripts": {
     "build": "tsup",
-    "watch": "npm run build -- --watch"
+    "watch": "npm run build -- --watch",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.20.12",
+    "@babel/generator": "^7.20.14",
     "@babel/plugin-syntax-jsx": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "eval": "^0.1.8",
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.0",
-    "@types/prettier": "^2.7.2"
+    "@types/prettier": "^2.7.2",
+    "release-it": "^15.6.0"
   }
 }

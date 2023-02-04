@@ -52,18 +52,16 @@ export const createTw: any = () => {
           );
         } else if (!name.endsWith('-')) {
           if (!classList.includes(name)) {
-            if (variants.includes(name)) {
-              return (arg: any) => {
-                for (const a of arg.toString().split(' ')) {
-                  target.classes.add(`${name}:${a}`);
-                }
-                return thisTw;
-              };
-            }
+            const prefix =
+              name === 'important'
+                ? '!'
+                : variants.includes(name)
+                ? `${name}:`
+                : `[${name}]:`;
 
             return (arg: any) => {
-              for (const a of arg.toString().split(' ')) {
-                target.classes.add(`[${name}]:${a}`);
+              for (const chunk of arg.toString().split(' ')) {
+                target.classes.add(`${prefix}${chunk}`);
               }
               return thisTw;
             };
