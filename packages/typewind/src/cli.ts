@@ -63,9 +63,13 @@ const rootTypeTemplate = (
 ${others.join('\n')}
 
 type Typewind = ${types.join(' & ')} & {
-  ${modifiers.map(variant => `${variant}(style: Property): Property`).join(';')}
+  ${modifiers
+    .map((variant) => `${variant}(style: Property): Property`)
+    .join(';')}
 } & {
   [arbitraryVariant: string]: (style: Property) => Property;
+} & {
+  variant(variant: Variants, style: Property): Property;
 };
 
 declare const tw: Typewind;
@@ -153,14 +157,20 @@ export async function generateTypes() {
 
   const arbitrary = typeTemplate('Arbitrary', arbitraryStyles);
 
-  const root = rootTypeTemplate(
-    [standard, arbitrary],
-    ['Standard', 'Arbitrary'],
-    [...ctx.variantMap.keys(), 'important'].map(s => {
-      s = /^\d/.test(s) ? `_${s}` : s;
+  const variants = `type Variants = ${[...ctx.variantMap.keys()]
+    .map((variant) => `'${variant}'`)
+    .join(' | ')};`;
 
-      return fmtToTypewind(s);
-    })
+  const modifiers = [...ctx.variantMap.keys(), 'important'].map((s) => {
+    s = /^\d/.test(s) ? `_${s}` : s;
+
+    return fmtToTypewind(s);
+  });
+
+  const root = rootTypeTemplate(
+    [variants, standard, arbitrary],
+    ['Standard', 'Arbitrary'],
+    modifiers
   );
 
   fs.writeFileSync(

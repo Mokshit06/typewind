@@ -59,14 +59,20 @@ export const createTw: any = () => {
                 ? `${name}:`
                 : `[${name}]:`;
 
-            return (arg: any) => {
-              for (const chunk of arg.toString().split(' ')) {
+            function spreadModifier(prefix: string, chunks: any) {
+              for (const chunk of chunks.toString().split(' ')) {
                 target.classes.add(`${prefix}${chunk}`);
               }
-              return thisTw;
-            };
 
-            // dont add a class if name ends with - because then value is in next prop
+              return thisTw;
+            }
+
+            if (name === 'variant') {
+              return (modifier: any, classes: any) =>
+                spreadModifier(`${modifier}:`, classes);
+            }
+
+            return (arg: any) => spreadModifier(prefix, arg);
           }
           target.classes.add(name);
         }
