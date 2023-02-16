@@ -1,18 +1,36 @@
 import Link from 'next/link';
+import { tw } from 'typewind';
 import { Features } from './Features';
 
 export default function Home() {
   return (
-    <main className="my-6 max-w-[75rem] flex flex-col px-4 mx-auto items-center">
-      <div className="w-full max-w-[53rem]">
-        <h1 className="block text-center font-extrabold text-4xl sm:text-5xl md:text-6xl mt-12">
+    <main
+      className={
+        tw.my_6.max_w_['75rem'].flex.flex_col.px_4.mx_auto.items_center
+      }
+    >
+      <div className={tw.w_full.max_w_['53rem']}>
+        <h1
+          className={tw.block.text_center.font_extrabold.text_4xl.mt_12
+            .sm(tw.text_5xl)
+            .md(tw.text_6xl)}
+        >
           Bringing typesafety to Tailwind
         </h1>
 
-        <div className="mt-4">
-          <p className="text-md sm:text-lg text-xl mb-2 font-medium text-gray-400 md:!text-xl mx-auto max-w-full w-[880px] text-center px-4">
+        <div className={tw.mt_4}>
+          <p
+            className={tw.text_xl.mb_2.font_medium.text_gray_400.mx_auto.max_w_full.text_center.px_4
+              .sm(tw.text_lg)
+              .w_['880px'].md(tw.important(tw.text_xl))}
+          >
             Introducing Typewind, the magic of Tailwind combined with the{' '}
-            <span className="underline decoration-wavy decoration-red-500 text-white underline-offset-4 font-mono">
+            <span
+              className={
+                tw.underline.decoration_wavy.decoration_red_500.text_white
+                  .underline_offset_4.font_mono
+              }
+            >
               safety
             </span>{' '}
             of Typescript
@@ -20,10 +38,20 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center sm:flex-row gap-4 my-6 text-lg w-full">
+      <div
+        className={tw.flex.flex_col.justify_center.items_center.gap_4.my_6.text_lg.w_full.sm(
+          tw.flex_row
+        )}
+      >
         <Link
           href="/docs"
-          className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 py-3 rounded-lg w-full justify-center sm:w-auto bg-sky-500 highlight-white/20 hover:bg-sky-400 flex gap-x-2 items-center"
+          className={tw.text_white.font_semibold.h_12.px_6.py_3.rounded_lg.w_full.justify_center.bg_sky_500.flex.gap_x_2.items_center
+            .focus(
+              tw.outline_none.ring_2.ring_slate_400.ring_offset_2
+                .ring_offset_slate_50
+            )
+            .sm(tw.w_auto)
+            .hover(tw.bg_sky_400)}
         >
           Get Started
           <svg
@@ -42,7 +70,10 @@ export default function Home() {
           </svg>
         </Link>
         <a
-          className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 py-3 rounded-lg w-full flex items-center justify-center gap-2 sm:w-auto bg-gray-800 hover:bg-gray-700"
+          className={tw.text_white.font_semibold.h_12.px_6.py_3.rounded_lg.w_full.flex.items_center.justify_center.gap_2.bg_gray_800
+            .focus(tw.outline_none.ring_2.ring_slate_400.ring_offset_2)
+            .sm(tw.w_auto)
+            .hover(tw.bg_gray_700)}
           target="_blank"
           rel="noreferrer"
           href="//github.com/mokshit06/typewind"
@@ -66,7 +97,7 @@ export default function Home() {
       <video
         src="/preview.mov"
         style={{ filter: 'brightness(0.9) saturate(120%) contrast(95%)' }}
-        className="block w-full shadow-2xl max-w-[60rem]"
+        className={tw.block.w_full.shadow_2xl.max_w_['60rem']}
         autoPlay
         loop
         muted

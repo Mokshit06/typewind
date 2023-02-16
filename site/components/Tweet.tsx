@@ -11,12 +11,7 @@ export default function Tweet() {
 
   return (
     <>
-      <blockquote
-        className="twitter-tweet"
-        data-conversation="none"
-        data-dnt="true"
-        data-theme="dark"
-      >
+      <blockquote data-conversation="none" data-dnt="true" data-theme="dark">
         <p lang="en" dir="ltr">
           here&#39;s an idea{' '}
           <a href="https://t.co/L74inu8TKW">pic.twitter.com/L74inu8TKW</a>
