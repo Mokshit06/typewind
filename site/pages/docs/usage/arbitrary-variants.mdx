@@ -6,9 +6,8 @@ import { Tabs, Tab, Callout } from 'nextra-theme-docs';
 import { CodeOutput } from '../../../components/CodeOutput';
 
 ## Arbitrary Variants
-
 Tailwind v3.1 released [support for Arbitrary Variants](https://tailwindcss.com/docs/hover-focus-and-other-states#using-arbitrary-variants).
-You can also pass arbitrary variants to the `tw` proxy using the same `[]` syntax as you use with arbitrary values... but the other way round.
+You can use the `variant()` function to work with arbitrary variants, which takes in the variant as the first argument and the Typewind classes as the second.
 
 ```jsx /text_['20px']/
 import { tw } from 'typewind';
@@ -22,7 +21,7 @@ export default function App() {
           <li
             key={i}
             className={
-              tw['&:nth-child(3)'](tw.underline)
+              tw.variant('&:nth-child(3)', tw.underline)
                 .list_disc.mx_5.text_white
             }
           >
@@ -33,6 +32,10 @@ export default function App() {
   );
 }
 ```
+
+<Callout type="info">
+Note that here, the modifiers passed in are the exact same as their Tailwind counterparts and do not use the `_` syntax typically used by Typewind.
+</Callout>
 
 <Tabs items={['Code Output', 'Result']}>
   <Tab>

@@ -24,9 +24,7 @@ export default function Home() {
             {/* primary color is coming from tailwind.config.js */}
             <h1
               className={
-                tw.text_2xl.font_bold.text_next_example_primary.text_[
-                '#f66666'
-                ]
+                tw.text_2xl.font_bold.text_next_example_primary.text_['#f66666']
               }
             >
               Hello World
@@ -38,7 +36,8 @@ export default function Home() {
                   <li
                     key={i}
                     className={
-                      tw.text_next_example_primary['&:nth-child(3)'](
+                      tw.text_next_example_primary.variant(
+                        '&:nth-child(3)',
                         tw.underline
                       ).list_disc.mx_5
                     }

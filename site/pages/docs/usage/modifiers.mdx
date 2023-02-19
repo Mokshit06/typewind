@@ -19,7 +19,7 @@ export default function Button() {
   return (
     <button
       className={tw.bg_blue_500
-        .hover(tw.bg_blue_600)
+        .hover(tw.bg_blue_600).first_letter(tw.text_red_500.font_bold)
         .text_white.rounded.py_3.px_4.md(tw.py_4.px_5)
         .dark(tw.bg_sky_900.hover(tw.bg_sky_800))}
     >
@@ -32,14 +32,14 @@ export default function Button() {
 <Tabs items={['Code Output', 'Result']}>
   <Tab>
     ```tsx
-    <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-5 md:py-5 dark:bg-sky-900 dark:hover:bg-sky-800">
+    <button className="bg-blue-500 hover:bg-blue-600 first-letter:text-red-500 first-letter:font-bold text-white rounded py-3 px-4 md:py-5 md:py-5 dark:bg-sky-900 dark:hover:bg-sky-800">
       Click Me
     </button>
     ```
   </Tab>
   <Tab>
     <CodeOutput>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-4 md:py-5 dark:bg-sky-900 dark:hover:bg-sky-800">
+      <button className="bg-blue-500 hover:bg-blue-600 first-letter:text-red-500 first-letter:font-bold text-white rounded py-3 px-4 md:py-5 md:py-5 dark:bg-sky-900 dark:hover:bg-sky-800">
         Click Me
       </button>
     </CodeOutput>
@@ -57,3 +57,4 @@ export default function Button() {
 **Differences from Tailwind**:
 Because of the way Typewind works, you cannot use `tw.2xl()` for responsiveness but will have to use `tw._2xl(){:jsx}`.
 </Callout>
+
