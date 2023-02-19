@@ -19,7 +19,8 @@ function fmtArbitraryRule(name: string, value: string, candidateRuleMap: any) {
   return classes.join(' ');
 }
 
-const fmtToTailwind = (s: string) => s.replace(/_/g, '-').replace(/\$/, '@');
+const fmtToTailwind = (s: string) =>
+  s.replace(/_/g, '-').replace(/^\$/, '@').replace(/\$/, '/');
 
 export const createTw: any = () => {
   const twUsed = (classes = new Set<string>()) => {
@@ -50,7 +51,9 @@ export const createTw: any = () => {
           target.classes.add(
             fmtArbitraryRule(target.prevProp.slice(0, -1), p, candidateRuleMap)
           );
-        } else if (!name.endsWith('-')) {
+        } else if (target.prevProp?.endsWith('/')) {
+          target.classes.add(`${target.prevProp}${name}`);
+        } else if (!name.endsWith('-') && !name.endsWith('/')) {
           if (!classList.includes(name)) {
             const prefix =
               name === 'important'

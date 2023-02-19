@@ -33,7 +33,7 @@ function createDoc(doc: string) {
   }
 }
 
-const fmtToTypewind = (s: string) => s.replace(/-/g, '_').replace(/\@/, '$');
+const fmtToTypewind = (s: string) => s.replace(/-/g, '_').replace(/^\@/, '$');
 
 const objectTemplate = (
   props: [prop: string, type: string, doc?: string][]
@@ -62,10 +62,15 @@ const rootTypeTemplate = (
 
 ${others.join('\n')}
 
+type OpacityMap = {
+  [K in Opacity]: Property;
+} & Record<string, Property>;
+type Colors = {
+  [K in {} as \`\${_Colors}\`]: OpacityMap
+}
+
 type Typewind = ${types.join(' & ')} & {
-  ${modifiers
-    .map((variant) => `${variant}(style: Property): Property`)
-    .join(';')}
+  ${modifiers.map(variant => `${variant}(style: Property): Property`).join(';')}
 } & {
   [arbitraryVariant: string]: (style: Property) => Property;
 } & {
@@ -103,18 +108,40 @@ export async function generateTypes() {
     s => !s.startsWith('-')
   );
 
+  const opacityMap = ctx.tailwindConfig.theme.opacity;
+
   const classesWithStandardSyntax = classList.filter(s => !/\.|\//.test(s));
+  const classesWithCandidateItem = classesWithStandardSyntax.map(s => {
+    return [s, getCandidateItem(ctx.candidateRuleMap, s)] as const;
+  });
+
+  const colorSet = new Set<string>();
   const standard = typeTemplate(
     'Standard',
-    classesWithStandardSyntax.map(s => {
-      let { rule: rules, rest } = getCandidateItem(ctx.candidateRuleMap, s);
+    classesWithCandidateItem.map(([s, { rule: rules, rest }]) => {
       let css = '';
 
       if (rules) {
         for (const rule of rules) {
-          const [_info, ruleOrFn] = rule;
+          const [info, ruleOrFn] = rule;
 
           if (typeof ruleOrFn === 'function') {
+            const types = info.options.types;
+            const isColor = types.some(
+              (t: Record<string, string>) => t.type == 'color'
+            );
+
+            if (isColor) {
+              if (rest) {
+                const key = fmtToTypewind(s) + '$';
+
+                colorSet.add(key);
+                for (const opacity in opacityMap) {
+                  // colorSet.add(key + opacity);
+                }
+              }
+            }
+
             const [ruleSet] = ruleOrFn(rest ?? 'DEFAULT', {});
             if (ruleSet) {
               css += fmtRuleToCss(ruleSet);
@@ -129,6 +156,10 @@ export async function generateTypes() {
       return [fmtToTypewind(s), 'Property', css];
     })
   );
+  // const colorTemplate = typeTemplate(
+  //   '_Colors',
+  //   [...colorSet].map(color => [color, 'Property'])
+  // );
   const candidates = [...ctx.candidateRuleMap.entries()];
   const arbitraryStyles: [string, string, string?][] = [];
   for (const [name, rules] of candidates) {
@@ -158,18 +189,26 @@ export async function generateTypes() {
   const arbitrary = typeTemplate('Arbitrary', arbitraryStyles);
 
   const variants = `type Variants = ${[...ctx.variantMap.keys()]
-    .map((variant) => `'${variant}'`)
+    .map(variant => `'${variant}'`)
     .join(' | ')};`;
 
-  const modifiers = [...ctx.variantMap.keys(), 'important'].map((s) => {
+  const modifiers = [...ctx.variantMap.keys(), 'important'].map(s => {
     s = /^\d/.test(s) ? `_${s}` : s;
 
     return fmtToTypewind(s);
   });
 
   const root = rootTypeTemplate(
-    [variants, standard, arbitrary],
-    ['Standard', 'Arbitrary'],
+    [
+      variants,
+      standard,
+      arbitrary,
+      `type _Colors = ${[...colorSet].map(k => JSON.stringify(k)).join(' | ')}`,
+      `type Opacity = ${Object.keys(opacityMap)
+        .map(k => JSON.stringify(k))
+        .join(' | ')}`,
+    ],
+    ['Standard', 'Arbitrary', 'Variants', 'Colors'],
     modifiers
   );
 

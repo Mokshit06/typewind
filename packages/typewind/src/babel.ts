@@ -53,7 +53,7 @@ try {
   throw new Error(\`Error in evaluating typewind expression: ${code.replace(
     '`',
     '\\`'
-  )}\`)
+  )}. \${error}\`)
 }
 `,
           true
