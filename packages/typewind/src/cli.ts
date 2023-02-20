@@ -167,7 +167,7 @@ export async function generateTypes() {
         }
       }
 
-      return { prop: fmtToTypewind(s), type: 'Property', css };
+      return { prop: fmtToTypewind(s), type: 'Property', doc: css };
     })
   );
   const candidates = [...ctx.candidateRuleMap.entries()];
@@ -192,7 +192,7 @@ export async function generateTypes() {
             return {
               prop: val,
               type: 'Property',
-              css: fmtRuleToCss(ruleSet),
+              doc: fmtRuleToCss(ruleSet),
             };
           })
         )
@@ -202,7 +202,7 @@ export async function generateTypes() {
     arbitraryStyles.push({
       prop: ident,
       type: styles.join(' & ') + ' & Record<string, Property>',
-      css: undefined,
+      doc: undefined,
     });
   }
 
