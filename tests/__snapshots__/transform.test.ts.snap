@@ -28,7 +28,7 @@ export default function App() {
 exports[`transformBabel works with modifiers 1`] = `
 "import { tw } from 'typewind';
 export default function Button() {
-  return <button className={"bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-4 md:px-5 lg:py-5 lg:px-6 dark:bg-sky-900 dark:hover:bg-sky-800 !text-red-500 hover:!text-red-500"}>
+  return <button className={"bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-4 md:px-5 [lg]:py-5 [lg]:px-6 dark:bg-sky-900 dark:hover:bg-sky-800 !text-red-500 hover:!text-red-500"}>
       Click Me
     </button>;
 }"
@@ -39,7 +39,7 @@ exports[`transformBabel works with normal-usage 1`] = `
 import './index.css';
 export default function App() {
   return <div className={"h-screen w-full bg-gray-800 flex justify-center items-center"}>
-      <p className={"text-white"}>Hello World!</p>
+      <p className={"text-blue-100/25"}>Hello World!</p>
     </div>;
 }"
 `;
