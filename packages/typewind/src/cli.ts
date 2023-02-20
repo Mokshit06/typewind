@@ -82,7 +82,7 @@ type Typewind = ${types.join(' & ')} & {
 } & {
   // [arbitraryVariant: string]: (style: Property) => Property;
 } & {
-  variant<T extends \`&\${string}\`>(variant: T, style: Property | string): Property;
+  variant<T extends \`&\${string}\` | \`@\${string}\`>(variant: T, style: Property | string): Property;
 };
 
 declare const tw: Typewind;
