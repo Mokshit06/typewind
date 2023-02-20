@@ -2,16 +2,19 @@
 
 import fs from 'fs';
 import path from 'path';
-import prettier from 'prettier';
+import { transform } from 'lightningcss';
 import { createTypewindContext, loadConfig } from './utils';
 
 function createDoc(doc: string) {
   try {
     let cssDoc = `
     * \`\`\`css
-    * ${prettier
-      .format(doc, { parser: 'css', tabWidth: 4 })
-      .replace(/\n/g, '\n    *')}
+    * ${transform({
+      filename: 'doc.css',
+      code: Buffer.from(doc),
+    })
+      .code.toString()
+      .replace(/\n/g, '\n    * ')}
     * \`\`\`
   `;
     const config = loadConfig();
