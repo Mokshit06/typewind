@@ -2,6 +2,9 @@
   "name": "typewind-repo",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=15.0.0"
+  },
   "type": "module",
   "keywords": [],
   "workspaces": [
