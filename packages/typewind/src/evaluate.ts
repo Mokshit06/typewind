@@ -72,7 +72,7 @@ export const createTw: any = () => {
 
             if (name === 'variant') {
               return (modifier: any, classes: any) =>
-                spreadModifier(`${modifier}:`, classes);
+                spreadModifier(`[${modifier}]:`, classes);
             }
 
             return (arg: any) => spreadModifier(prefix, arg);
