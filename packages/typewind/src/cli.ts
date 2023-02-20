@@ -36,11 +36,11 @@ function createDoc(doc: string) {
 const fmtToTypewind = (s: string) => s.replace(/-/g, '_').replace(/^\@/, '$');
 
 const objectTemplate = (
-  props: [prop: string, type: string, doc?: string][]
+  props: { prop: string; type: string; doc?: string }[]
 ) => {
   return `{${props
     .map(
-      ([prop, type, doc]) =>
+      ({ prop, type, doc }) =>
         `/** ${doc ? createDoc(doc) : ''} */ ${JSON.stringify(prop)}: ${type};`
     )
     .join('\n')}}`;
@@ -48,16 +48,22 @@ const objectTemplate = (
 
 const typeTemplate = (
   name: string,
-  props: [prop: string, type: string, doc?: string][]
+  props: { prop: string; type: string; doc?: string }[]
 ) => `
 type ${name} = ${objectTemplate(props)}
 `;
 
-const rootTypeTemplate = (
-  others: string[],
-  types: string[],
-  modifiers: string[] = []
-) =>
+const rootTypeTemplate = ({
+  others,
+  types,
+  modifiers,
+  colors,
+}: {
+  others: string[];
+  types: string[];
+  modifiers: string[];
+  colors: string[];
+}) =>
   `type Property = Typewind & string;
 
 ${others.join('\n')}
@@ -66,15 +72,17 @@ type OpacityMap = {
   [K in Opacity]: Property;
 } & Record<string, Property>;
 type Colors = {
-  [K in {} as \`\${_Colors}\`]: OpacityMap
+  ${colors.map(color => `${color}: OpacityMap`).join(';\n')}
 }
 
 type Typewind = ${types.join(' & ')} & {
-  ${modifiers.map(variant => `${variant}(style: Property): Property`).join(';')}
+  ${modifiers
+    .map(variant => `${variant}(style: Property): Property`)
+    .join(';\n')}
 } & {
-  [arbitraryVariant: string]: (style: Property) => Property;
+  // [arbitraryVariant: string]: (style: Property) => Property;
 } & {
-  variant(variant: Variants, style: Property): Property;
+  variant<T extends \`&\${string}\`>(variant: T, style: Property | string): Property;
 };
 
 declare const tw: Typewind;
@@ -109,6 +117,17 @@ export async function generateTypes() {
   );
 
   const opacityMap = ctx.tailwindConfig.theme.opacity;
+  const flatColorsList: string[] = [];
+
+  for (const [k, v] of Object.entries(ctx.tailwindConfig.theme.colors)) {
+    if (typeof v === 'object') {
+      for (const col in v) {
+        flatColorsList.push(k + '-' + col);
+      }
+    } else {
+      flatColorsList.push(k);
+    }
+  }
 
   const classesWithStandardSyntax = classList.filter(s => !/\.|\//.test(s));
   const classesWithCandidateItem = classesWithStandardSyntax.map(s => {
@@ -131,15 +150,10 @@ export async function generateTypes() {
               (t: Record<string, string>) => t.type == 'color'
             );
 
-            if (isColor) {
-              if (rest) {
-                const key = fmtToTypewind(s) + '$';
+            if (isColor && rest && flatColorsList.includes(rest)) {
+              const key = fmtToTypewind(s) + '$';
 
-                colorSet.add(key);
-                for (const opacity in opacityMap) {
-                  // colorSet.add(key + opacity);
-                }
-              }
+              colorSet.add(key);
             }
 
             const [ruleSet] = ruleOrFn(rest ?? 'DEFAULT', {});
@@ -153,16 +167,15 @@ export async function generateTypes() {
         }
       }
 
-      return [fmtToTypewind(s), 'Property', css];
+      return { prop: fmtToTypewind(s), type: 'Property', css };
     })
   );
-  // const colorTemplate = typeTemplate(
-  //   '_Colors',
-  //   [...colorSet].map(color => [color, 'Property'])
-  // );
   const candidates = [...ctx.candidateRuleMap.entries()];
-  const arbitraryStyles: [string, string, string?][] = [];
+  const arbitraryStyles = [];
   for (const [name, rules] of candidates) {
+    const ident = fmtToTypewind(name) + '_';
+    const styles: string[] = [];
+
     for (const [rule, fn] of rules) {
       if (
         !rule.options ||
@@ -170,27 +183,30 @@ export async function generateTypes() {
         Object.keys(rule.options.values).length == 0
       )
         continue;
-      const ident = fmtToTypewind(name) + '_';
 
-      arbitraryStyles.push([
-        ident,
+      styles.push(
         objectTemplate(
           Object.keys(rule.options.values).map(val => {
             const [ruleSet] = fn(val, {});
 
-            return [val, 'Property', fmtRuleToCss(ruleSet)];
+            return {
+              prop: val,
+              type: 'Property',
+              css: fmtRuleToCss(ruleSet),
+            };
           })
-        ) + ' & Record<string, Property>',
-        undefined,
-      ]);
+        )
+      );
     }
+
+    arbitraryStyles.push({
+      prop: ident,
+      type: styles.join(' & ') + ' & Record<string, Property>',
+      css: undefined,
+    });
   }
 
   const arbitrary = typeTemplate('Arbitrary', arbitraryStyles);
-
-  const variants = `type Variants = ${[...ctx.variantMap.keys()]
-    .map(variant => `'${variant}'`)
-    .join(' | ')};`;
 
   const modifiers = [...ctx.variantMap.keys(), 'important'].map(s => {
     s = /^\d/.test(s) ? `_${s}` : s;
@@ -198,19 +214,18 @@ export async function generateTypes() {
     return fmtToTypewind(s);
   });
 
-  const root = rootTypeTemplate(
-    [
-      variants,
+  const root = rootTypeTemplate({
+    others: [
       standard,
       arbitrary,
-      `type _Colors = ${[...colorSet].map(k => JSON.stringify(k)).join(' | ')}`,
       `type Opacity = ${Object.keys(opacityMap)
         .map(k => JSON.stringify(k))
         .join(' | ')}`,
     ],
-    ['Standard', 'Arbitrary', 'Variants', 'Colors'],
-    modifiers
-  );
+    types: ['Standard', 'Arbitrary', 'Colors'],
+    modifiers,
+    colors: [...colorSet].map(k => JSON.stringify(k)),
+  });
 
   fs.writeFileSync(
     path.join(require.resolve('typewind'), '../index.d.ts'),
