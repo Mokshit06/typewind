@@ -1,8 +1,6 @@
 import { createTypewindContext } from './utils';
 const ctx = createTypewindContext();
-const { candidateRuleMap, variantMap, getClassList } = ctx;
-const variants = [...variantMap.keys()];
-const classList = getClassList();
+const { candidateRuleMap, variantMap } = ctx;
 
 function fmtArbitraryRule(name: string, value: string, candidateRuleMap: any) {
   const classes = [];
@@ -54,29 +52,25 @@ export const createTw: any = () => {
         } else if (target.prevProp?.endsWith('/')) {
           target.classes.add(`${target.prevProp}${name}`);
         } else if (!name.endsWith('-') && !name.endsWith('/')) {
-          if (!classList.includes(name)) {
-            const prefix =
-              name === 'important'
-                ? '!'
-                : variants.includes(name)
-                ? `${name}:`
-                : `[${name}]:`;
-
-            function spreadModifier(prefix: string, chunks: any) {
-              for (const chunk of chunks.toString().split(' ')) {
-                target.classes.add(`${prefix}${chunk}`);
-              }
-
-              return thisTw;
+          function spreadModifier(prefix: string, chunks: any) {
+            for (const chunk of chunks.toString().split(' ')) {
+              target.classes.add(`${prefix}${chunk}`);
             }
 
-            if (name === 'variant') {
-              return (modifier: any, classes: any) =>
-                spreadModifier(`[${modifier}]:`, classes);
-            }
+            return thisTw;
+          }
+
+          if (name === 'variant') {
+            return (modifier: string, classes: any) =>
+              spreadModifier(`[${modifier}]:`, classes);
+          }
+
+          if (variantMap.has(name) || name === 'important') {
+            const prefix = name === 'important' ? '!' : `${name}:`;
 
             return (arg: any) => spreadModifier(prefix, arg);
           }
+
           target.classes.add(name);
         }
 
@@ -92,7 +86,7 @@ export const createTw: any = () => {
   const tw = new Proxy(
     {},
     {
-      get(target, p, recv) {
+      get(_target, p) {
         // @ts-ignore
         if (typeof p !== 'string') return Reflect.get(...arguments);
 
