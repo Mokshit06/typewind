@@ -37,7 +37,7 @@ const config: DocsThemeConfig = {
       titleTemplate: '%s – Typewind',
     };
   },
-  docsRepositoryBase: 'https://github.com/mokshit06/typewind/blog/main/site',
+  docsRepositoryBase: 'https://github.com/mokshit06/typewind/blob/main/site',
   footer: {
     text: 'Typewind, MIT 2023 © Mokshit Jain.',
   },
