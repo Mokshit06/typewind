@@ -37,7 +37,7 @@ const config: DocsThemeConfig = {
       titleTemplate: '%s – Typewind',
     };
   },
-  docsRepositoryBase: 'https://github.com/mokshit06/typewind',
+  docsRepositoryBase: 'https://github.com/mokshit06/typewind/blog/main/site',
   footer: {
     text: 'Typewind, MIT 2023 © Mokshit Jain.',
   },
@@ -52,12 +52,25 @@ const config: DocsThemeConfig = {
 
     return (
       <>
-        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link rel="mask-icon" href="/apple-touch-icon.png" color="#000000" />
         <link
-          rel="mask-icon"
-          href="/favicon/safari-pinned-tab.svg"
-          color="#000000"
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
         />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta httpEquiv="Content-Language" content="en" />
         <meta
