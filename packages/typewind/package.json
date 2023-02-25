@@ -6,9 +6,11 @@
   "main": "dist/index.js",
   "homepage": "https://typewind.vercel.app",
   "scripts": {
-    "build": "tsup",
+    "build": "npm run build:tsup && npm run build:cargo",
+    "build:tsup": "tsup",
     "watch": "npm run build -- --watch",
-    "release": "release-it"
+    "release": "release-it",
+    "build:cargo": "cargo build-wasi --release && cp target/wasm32-wasi/release/typewind_swc.wasm dist"
   },
   "repository": {
     "type": "git",
@@ -31,7 +33,8 @@
     "./transform": {
       "types": "./dist/transform.d.ts",
       "default": "./dist/transform.js"
-    }
+    },
+    "./swc": "./dist/typewind_swc.wasm"
   },
   "keywords": [
     "typescript",
