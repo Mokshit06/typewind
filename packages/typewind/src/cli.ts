@@ -75,12 +75,12 @@ type OpacityMap = {
   [K in Opacity]: Property;
 } & Record<string, Property>;
 type Colors = {
-  ${colors.map(color => `${color}: OpacityMap`).join(';\n')}
+  ${colors.map((color) => `${color}: OpacityMap`).join(';\n')}
 }
 
 type Typewind = ${types.join(' & ')} & {
   ${modifiers
-    .map(variant => `${variant}(style: Property): Property`)
+    .map((variant) => `${variant}(style: Property): Property`)
     .join(';\n')}
 } & {
   // [arbitraryVariant: string]: (style: Property) => Property;
@@ -115,8 +115,30 @@ function getCandidateItem(
 
 export async function generateTypes() {
   const ctx = createTypewindContext();
+
+  // only exists to generate rule-map for swc plugin
+  // const candidateRuleMap = ctx.candidateRuleMap;
+
+  // const candidateObj = Object.fromEntries(
+  //   [...candidateRuleMap.entries()]
+  //     .map(([k, rules]) => {
+  //       return [
+  //         k,
+  //         rules
+  //           .filter(
+  //             ([rule]: any) => rule.options?.values
+  //             // rule.options?.values.every1((v: any) => typeof v === 'string')
+  //           )
+  //           .map(([rule]: any) => Object.keys(rule.options?.values)),
+  //       ];
+  //     })
+  //     .filter(([k, v]) => v.length > 0)
+  // );
+
+  // fs.writeFileSync('./map.json', JSON.stringify(candidateObj));
+
   const classList = (ctx.getClassList() as string[]).filter(
-    s => !s.startsWith('-')
+    (s) => !s.startsWith('-')
   );
 
   const opacityMap = ctx.tailwindConfig.theme.opacity;
@@ -132,8 +154,8 @@ export async function generateTypes() {
     }
   }
 
-  const classesWithStandardSyntax = classList.filter(s => !/\.|\//.test(s));
-  const classesWithCandidateItem = classesWithStandardSyntax.map(s => {
+  const classesWithStandardSyntax = classList.filter((s) => !/\.|\//.test(s));
+  const classesWithCandidateItem = classesWithStandardSyntax.map((s) => {
     return [s, getCandidateItem(ctx.candidateRuleMap, s)] as const;
   });
 
@@ -189,7 +211,7 @@ export async function generateTypes() {
 
       styles.push(
         objectTemplate(
-          Object.keys(rule.options.values).map(val => {
+          Object.keys(rule.options.values).map((val) => {
             const [ruleSet] = fn(val, {});
 
             return {
@@ -211,7 +233,7 @@ export async function generateTypes() {
 
   const arbitrary = typeTemplate('Arbitrary', arbitraryStyles);
 
-  const modifiers = [...ctx.variantMap.keys(), 'important'].map(s => {
+  const modifiers = [...ctx.variantMap.keys(), 'important'].map((s) => {
     s = /^\d/.test(s) ? `_${s}` : s;
 
     return fmtToTypewind(s);
@@ -222,12 +244,12 @@ export async function generateTypes() {
       standard,
       arbitrary,
       `type Opacity = ${Object.keys(opacityMap)
-        .map(k => JSON.stringify(k))
+        .map((k) => JSON.stringify(k))
         .join(' | ')}`,
     ],
     types: ['Standard', 'Arbitrary', 'Colors'],
     modifiers,
-    colors: [...colorSet].map(k => JSON.stringify(k)),
+    colors: [...colorSet].map((k) => JSON.stringify(k)),
   });
 
   fs.writeFileSync(
@@ -271,7 +293,7 @@ function fmtRuleToCss(ruleSet: any) {
   return `${selector} ${fmtRuleset(ruleSet[selector])}`;
 }
 
-generateTypes().catch(err => {
+generateTypes().catch((err) => {
   console.error(err);
   process.exit(1);
 });

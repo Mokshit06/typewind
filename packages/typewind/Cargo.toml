@@ -1,0 +1,21 @@
+[package]
+name = "typewind-swc"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+path = "swc/lib.rs"
+
+[profile.release]
+lto = true
+
+[dependencies]
+serde = "1"
+serde_json = "1.0.93"
+swc_core = { version = "0.59.*", features = ["ecma_plugin_transform"] }
+swc_ecma_codegen = "0.129.13"
+
+# .cargo/config defines few alias to build plugin.
+# cargo build-wasi generates wasm-wasi32 binary
+# cargo build-wasm32 generates wasm32-unknown-unknown binary.
