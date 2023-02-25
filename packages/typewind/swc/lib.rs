@@ -192,6 +192,8 @@ impl VisitMut for TransformVisitor {
                 value: wr.join(" ").into(),
                 raw: None,
             }));
+
+            self.inside_tw = false;
         } else {
             e.visit_mut_children_with(self)
         }
