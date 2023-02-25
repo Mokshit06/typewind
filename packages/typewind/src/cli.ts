@@ -116,25 +116,26 @@ function getCandidateItem(
 export async function generateTypes() {
   const ctx = createTypewindContext();
 
-  const candidateRuleMap = ctx.candidateRuleMap;
+  // only exists to generate rule-map for swc plugin
+  // const candidateRuleMap = ctx.candidateRuleMap;
 
-  const candidateObj = Object.fromEntries(
-    [...candidateRuleMap.entries()]
-      .map(([k, rules]) => {
-        return [
-          k,
-          rules
-            .filter(
-              ([rule]: any) => rule.options?.values
-              // rule.options?.values.every1((v: any) => typeof v === 'string')
-            )
-            .map(([rule]: any) => Object.keys(rule.options?.values)),
-        ];
-      })
-      .filter(([k, v]) => v.length > 0)
-  );
+  // const candidateObj = Object.fromEntries(
+  //   [...candidateRuleMap.entries()]
+  //     .map(([k, rules]) => {
+  //       return [
+  //         k,
+  //         rules
+  //           .filter(
+  //             ([rule]: any) => rule.options?.values
+  //             // rule.options?.values.every1((v: any) => typeof v === 'string')
+  //           )
+  //           .map(([rule]: any) => Object.keys(rule.options?.values)),
+  //       ];
+  //     })
+  //     .filter(([k, v]) => v.length > 0)
+  // );
 
-  fs.writeFileSync('./map.json', JSON.stringify(candidateObj));
+  // fs.writeFileSync('./map.json', JSON.stringify(candidateObj));
 
   const classList = (ctx.getClassList() as string[]).filter(
     (s) => !s.startsWith('-')
