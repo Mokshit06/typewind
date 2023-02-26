@@ -90,6 +90,10 @@ const config: DocsThemeConfig = {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@mokshit06" />
         <meta
+          name="og:image"
+          content="https://typewind.dev/typewind-logo.png"
+        />
+        <meta
           name="og:title"
           content={
             title
