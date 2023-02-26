@@ -17,7 +17,7 @@ export default function App() {
         <h1 className={tw.text_2xl.font_bold.text_primary}>Hello World</h1>
         <p>
           This is an example vite app demonstrating the use of{' '}
-          <a href="//typewind.vercel.app" className={tw.text_primary.underline}>
+          <a href="//typewind.dev" className={tw.text_primary.underline}>
             Typewind
           </a>
           .

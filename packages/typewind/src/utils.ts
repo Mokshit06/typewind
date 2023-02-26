@@ -34,7 +34,7 @@ function getConfigPath() {
   }
 
   throw new Error(
-    'No tailwind config file found!\nIf your tailwind config file is not on the same folder, check: https://typewind.vercel.app/docs/installation/custom-config-file-path'
+    'No tailwind config file found!\nIf your tailwind config file is not on the same folder, check: https://typewind.dev/docs/installation/custom-config-file-path'
   );
 }
 

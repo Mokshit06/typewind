@@ -49,7 +49,7 @@ export default function Home() {
             <p>
               This is an example vite app demonstrating the use of{' '}
               <a
-                href="//typewind.vercel.app"
+                href="//typewind.dev"
                 className={tw.text_next_example_primary.underline}
               >
                 Typewind
