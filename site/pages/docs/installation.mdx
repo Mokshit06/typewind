@@ -2,7 +2,7 @@
 title: Installation
 ---
 
-import { Tab, Tabs, Callout } from 'nextra-theme-docs';
+import { Tab, Tabs, Callout, Cards, Card, Steps } from 'nextra-theme-docs';
 
 # Get started with Typewind
 
@@ -43,25 +43,55 @@ It is recommended to set this as your `postinstall` script:-
 
 ## Quick Start
 
-1. **Setup babel plugin**
-   <br />
-   Add the `typewind` plugin to your `.babelrc`.
+<Steps>
+### Setup transpiler
+   Typewind has support for both Babel and SWC.
+   <Cards>
+     <Card
+       icon={
+         <svg
+           xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           strokeWidth={1.5}
+           stroke="currentColor"
+           className="w-6 h-6"
+         >
+           <path
+             strokeLinecap="round"
+             strokeLinejoin="round"
+             d="M8.25 4.5l7.5 7.5-7.5 7.5"
+           />
+         </svg>
+       }
+       title="Babel"
+       href="/docs/transpilers/babel"
+     ></Card>
+     <Card
+       icon={
+         <svg
+           xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           strokeWidth={1.5}
+           stroke="currentColor"
+           className="w-6 h-6"
+         >
+           <path
+             strokeLinecap="round"
+             strokeLinejoin="round"
+             d="M8.25 4.5l7.5 7.5-7.5 7.5"
+           />
+         </svg>
+       }
+       title="SWC"
+       href="/docs/transpilers/swc"
+     ></Card>
+   </Cards>
 
-```json filename=".babelrc" copy {3}
-{
-  "presets": [],
-  "plugins": ["typewind/babel"]
-}
-```
+### Add transformer
 
-<Callout type="info">
-  Some frameworks like Vite have a different way of editting your babel plugin,
-  so make sure to take a look at their docs first.
-</Callout>
-
-2. **Add transformer**
-   <br />
-   Add the `typewind` transformers in your `tailwind.config.js`.
+Add the `typewind` transformers in your `tailwind.config.js`.
 
 ```js /typewindTransforms/ filename="tailwind.config.js" copy
 const { typewindTransforms } = require('typewind/transform');
@@ -75,13 +105,19 @@ module.exports = {
 };
 ```
 
-3. **Edit tsconfig.json**
-   <br />
-   This is optional, but we recommend you do this to fix [this issue](https://twitter.com/Mokshit06/status/1620812678687248384).
+### Edit tsconfig.json
+
+{' '}
+<br />
+This is optional, but we recommend you do this to fix [this
+issue](https://twitter.com/Mokshit06/status/1620812678687248384).
+
 ```json filename="tsconfig.json"
 {
   "compilerOptions": {
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": true
   }
 }
 ```
+
+</Steps>

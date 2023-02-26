@@ -1,0 +1,21 @@
+---
+title: Babel
+---
+
+import { Callout } from 'nextra-theme-docs';
+
+## Babel
+
+Add the `typewind` plugin to your `.babelrc`.
+
+```json filename=".babelrc" copy {3}
+{
+  "presets": [],
+  "plugins": ["typewind/babel"]
+}
+```
+
+<Callout type="info">
+  Some frameworks like Vite have a different way of editting your babel plugin,
+  so make sure to take a look at their docs first.
+</Callout>

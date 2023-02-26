@@ -1,0 +1,37 @@
+---
+title: SWC
+---
+
+import { Callout } from 'nextra-theme-docs';
+
+## SWC
+
+### NextJS
+
+Add the `typewind` plugin to your `next.config.js`.
+
+```js filename="next.config.js" copy {5}
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  experimental: {
+    swcPlugins: [['typewind/swc', {}]],
+  },
+};
+
+module.exports = nextConfig;
+```
+
+### Standalone SWC
+
+Add the `typewind` plugin to your `.swcrc`.
+
+```json filename=".swcrc" copy {4}
+{
+  "jsc": {
+    "experimental": {
+      "plugins": [["typewind-swc", {}]]
+    }
+  }
+}
+```
