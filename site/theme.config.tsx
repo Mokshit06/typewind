@@ -91,7 +91,7 @@ const config: DocsThemeConfig = {
         <meta name="twitter:site" content="@mokshit06" />
         <meta
           name="og:image"
-          content="https://typewind.dev/typewind-logo.png"
+          content="https://typewind.dev/typewind-share.png"
         />
         <meta
           name="og:title"
