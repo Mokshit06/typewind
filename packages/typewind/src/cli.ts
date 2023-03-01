@@ -137,9 +137,7 @@ export async function generateTypes() {
 
   // fs.writeFileSync('./map.json', JSON.stringify(candidateObj));
 
-  const classList = (ctx.getClassList() as string[]).filter(
-    (s) => !s.startsWith('-')
-  );
+  const classList = ctx.getClassList() as string[];
 
   const opacityMap = ctx.tailwindConfig.theme.opacity;
   const flatColorsList: string[] = [];
