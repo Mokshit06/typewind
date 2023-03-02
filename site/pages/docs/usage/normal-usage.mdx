@@ -45,10 +45,12 @@ export default function Button() {
 </Callout>
 
 <Callout emoji="⚠️">
-  **Differences from Tailwind**: - For classes that have decimals or a `/` in
+  **Differences from Tailwind**
+  - For classes that have decimals or a `/` in
   them, for eg. in `inset-1/2`, use the syntax for arbitrary values, like
   `tw.inset_["1/2"]`. Read more about arbitrary values
   [here](/docs/usage/arbitrary-values).
+  - Classes which start with negative values like `-mt-1` start with an `_` in Typewind. For eg. `tw._mt_1`.
 </Callout>
 
 ## Color Opacity
