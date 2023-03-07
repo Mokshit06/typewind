@@ -128,7 +128,20 @@ fn analyse_expr(v: &mut TransformVisitor, wr: &mut Vec<String>, e: &Expr) {
                     .as_ref(),
             );
 
-            if style == "variant" {
+            if style == "raw" {
+                let style = match &args
+                    .get(0)
+                    .expect("style not specified")
+                    .expr
+                    .as_lit()
+                    .expect("Only literal values allowed")
+                {
+                    Lit::Str(str) => str.value.to_string(),
+                    _ => panic!("Only string literal values allowed"),
+                };
+
+                wr.push(style);
+            } else if style == "variant" {
                 let prefix = match &args
                     .get(0)
                     .expect("variant not specified")
@@ -214,7 +227,7 @@ test!(
     |_| as_folder(TransformVisitor::new()),
     boo,
     // Input codes
-    r#"let style = tw.flex.$lg(tw.bg_black$['20']).md(tw.important(tw.works).text_["18px"].text_["red-200"])"#,
+    r#"let style = tw.flex.$lg(tw.bg_black$['20']).md(tw.important(tw.works).text_["18px"].text_["red-200"]).variant('&:nth-child(3)', tw.underline).raw("s-1/2")"#,
     // Output codes after transformed with plugin
-    r#"let style = "flex @lg:bg-black/20 md:text-red-200 md:text-[18px] md:!works""#
+    r#"let style = "flex @lg:bg-black/20 md:text-red-200 md:text-[18px] md:!works [&:nth-child(3)]:underline s-1/2""#
 );

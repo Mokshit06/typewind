@@ -60,6 +60,10 @@ export const createTw: any = () => {
             return thisTw;
           }
 
+          if (name === 'raw') {
+            return (style: string) => spreadModifier('', style);
+          }
+
           if (name === 'variant') {
             return (modifier: string, classes: any) =>
               spreadModifier(`[${modifier}]:`, classes);
