@@ -30,7 +30,7 @@ export default function App() {
 exports[`transformBabel works with modifiers 1`] = `
 "import { tw } from 'typewind';
 export default function Button() {
-  return <button className={"bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-4 md:px-5 dark:bg-sky-900 dark:hover:bg-sky-800 !text-red-500 hover:!text-red-500"}>
+  return <button className={"bg-blue-500 hover:bg-blue-600 text-white rounded py-3 px-4 md:py-4 md:px-5 dark:bg-sky-900 dark:hover:bg-sky-800 !text-red-500 hover:!text-red-500 s-1/2"}>
       Click Me
     </button>;
 }"
