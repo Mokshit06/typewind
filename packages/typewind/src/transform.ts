@@ -16,12 +16,12 @@ export const transformBabel = (ext: string, content: string) => {
 
   const res = babel.transformSync(content, config);
 
-  if (res?.code) {
-    return res?.code;
+  if (res?.code == undefined) {
+    throw new Error('Failed to transform file');
   }
 
-  throw new Error('Failed to transform file');
-}
+  return res.code;
+};
 
 export const typewindTransforms: Record<string, TransformerFn> = {
   tsx: (content) => transformBabel('tsx', content),
