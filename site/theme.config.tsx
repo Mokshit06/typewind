@@ -53,7 +53,7 @@ const config: DocsThemeConfig = {
           .
         </div>
         <a
-          href="https://vercel.com/?utm_source=swr"
+          href="https://vercel.com/?utm_source=typewind"
           target="_blank"
           rel="noopener"
           className="inline-flex items-center no-underline text-current font-semibold flex-end"
