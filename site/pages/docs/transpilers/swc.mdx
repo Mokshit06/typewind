@@ -35,3 +35,9 @@ Add the `typewind` plugin to your `.swcrc`.
   }
 }
 ```
+
+<div id="swc-caveat">
+  <Callout type="info" emoji="⚠️">
+    The SWC transpiler compiled directly to WASM binary and can't read the Tailwind config file, so arbitrary values only work for predefined tailwind values.
+  </Callout>
+</div>

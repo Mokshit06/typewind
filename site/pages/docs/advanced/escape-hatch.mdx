@@ -1,0 +1,39 @@
+---
+title: Escape Hatch
+---
+
+import { Tabs, Tab, Callout } from 'nextra-theme-docs';
+import { CodeOutput } from '../../../components/CodeOutput';
+
+
+## Escape Hatch
+
+Typewind provides an escape hatch as well, which directly adds the given string to the output. This is not recommended, but can be useful in [some cases](https://typewind.dev/docs/transpilers/swc#swc-caveat).
+
+```jsx /text_['20px']/
+import { tw } from 'typewind';
+
+export default function App() {
+  return (
+    <button className={tw.raw("bg-blue-500")}>Click Me</button>
+  );
+}
+```
+
+<Tabs items={['Code Output', 'Result']}>
+  <Tab>
+    ```tsx
+    <button className="bg-blue-500">Click Me</button>
+    ```
+  </Tab>
+  <Tab>
+    <CodeOutput>
+      <button className="bg-blue-500">Click Me</button>
+    </CodeOutput>
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+  For more reference, checkout the [Tailwind Docs for Arbitrary
+  Values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values).
+</Callout>
