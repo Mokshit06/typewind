@@ -232,7 +232,10 @@ export async function generateTypes() {
 
   const arbitrary = typeTemplate('Arbitrary', arbitraryStyles);
 
-  const modifiers = [...ctx.variantMap.keys(), 'important'].map((s) => {
+  const modifiers = [...ctx.variantMap.keys(), 'important']
+  // Remove * from the list of modifiers to avoid syntax error
+  .filter((s) => s !== '*')
+  .map((s) => {
     s = /^\d/.test(s) ? `_${s}` : s;
 
     return fmtToTypewind(s);
