@@ -7,7 +7,6 @@ export default function headingBabelPlugin(): PluginObj<
   PluginPass & { classes: string[] }
 > {
   const nodesReplaced = new Set<any>();
-  const ctx = createTypewindContext();
 
   return {
     name: 'typewind',

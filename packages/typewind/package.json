@@ -23,7 +23,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./cn": {
+      "types": "./dist/cn.d.ts",
+      "require": "./dist/cn.js",
+      "import": "./dist/cn.mjs"
     },
     "./dist/*": "./dist/*",
     "./babel": {
@@ -50,8 +56,10 @@
     "@babel/generator": "^7.20.14",
     "@babel/plugin-syntax-jsx": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
+    "clsx": "^2.1.1",
     "eval": "^0.1.8",
     "lightningcss": "^1.19.0",
+    "tailwind-merge": "^2.3.0",
     "tsup": "^6.5.0"
   },
   "devDependencies": {
