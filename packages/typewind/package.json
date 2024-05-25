@@ -1,6 +1,6 @@
 {
   "name": "typewind",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "The safety of Typescript with the magic of Tailwind.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
