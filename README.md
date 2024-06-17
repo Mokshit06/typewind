@@ -57,6 +57,6 @@ The above code would also return in a build error on running `tsc`
 
 **Types generated from config** - Type definitions of `tw` are generated directly from your tailwind config, so it is always custom to you, and also creates types for custom theme palette and plugins.
 
-## Languages and Tools
+## Languages
 
 [![Powered by Vercel](https://raw.githubusercontent.com/mokshit06/typewind/main/.github/powered-by-vercel.svg)](https://vercel.com?utm_source=typewind&utm_campaign=oss)
