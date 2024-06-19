@@ -53,8 +53,10 @@ import { tw } from 'typewind';
 const styles = tw.border_blackk; // ❌ Property 'border_blackk' does not exist on type 'Typewind'. Did you mean 'border_black'?
 ```
 
-**Types generated from config** - Type definitions of `tw` are generated directly from your tailwind config, so it is always custom to you, and also creates types for custom theme palette and plugins.
+## Some cool stuff:
 
-## Hello
+<code><img height="30" src="https://www.rust-lang.org/logos/rust-logo-128x128.png"/></code>
+<code><img height="30" src="https://raw.githubusercontent.com/github/explore/master/topics/react/react.png"/></code>
+<code><img height="30" src="https://www.solidjs.com/img/logo/without-wordmark/logo.png"/></code>
 
 [![Powered by Vercel](https://raw.githubusercontent.com/mokshit06/typewind/main/.github/powered-by-vercel.svg)](https://vercel.com?utm_source=typewind&utm_campaign=oss)
