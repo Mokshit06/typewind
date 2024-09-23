@@ -20,6 +20,12 @@ You can run the test suite using the following commands:
 cargo test
 ```
 
+You can run update the test suite snapshot using the following command:
+
+```sh
+UPDATE=1 cargo test
+```
+
 To test the features you've added, run the following command:
 
 ```sh

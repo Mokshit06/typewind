@@ -226,8 +226,5 @@ test!(
     Default::default(),
     |_| as_folder(TransformVisitor::new()),
     boo,
-    // Input codes
-    r#"let style = tw.flex.$lg(tw.bg_black$['20']).md(tw.important(tw.works).text_["18px"].text_["red-200"]).variant('&:nth-child(3)', tw.underline).raw("s-1/2")"#,
-    // Output codes after transformed with plugin
-    r#"let style = "flex @lg:bg-black/20 md:text-red-200 md:text-[18px] md:!works [&:nth-child(3)]:underline s-1/2""#
+    r#"let style = tw.flex.$lg(tw.bg_black$['20']).md(tw.important(tw.works).text_["18px"].text_["red-200"]).variant('&:nth-child(3)', tw.underline).raw("s-1/2")"#
 );
