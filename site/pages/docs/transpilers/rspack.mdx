@@ -1,0 +1,46 @@
+---
+title: Rspack
+---
+
+import { Callout } from 'nextra-theme-docs';
+
+## Rspack
+
+Typewind provides integration with Rspack through a loader and a plugin.
+
+### Using the Plugin (Recommended)
+
+Add the `typewind` plugin to your `rspack.config.js`:
+
+```js filename="rspack.config.js" copy {4,7}
+const typewindRspackPlugin = require('typewind/rspack-plugin').default;
+
+module.exports = {
+  plugins: [typewindRspackPlugin()],
+  // ... other rspack configuration
+};
+```
+
+### Manual Loader Configuration
+
+Alternatively, you can manually add the Typewind loader to your Rspack configuration:
+
+```js filename="rspack.config.js" copy {6-11}
+module.exports = {
+  // ... other rspack configuration
+  module: {
+    rules: [
+      // ... other rules
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ['typewind/rspack'],
+      },
+    ],
+  },
+};
+```
+
+<Callout type="info">
+  Make sure to also add the `typewindTransforms` to your `tailwind.config.js` as described in the [installation guide](/docs/installation#add-transformer).
+</Callout>

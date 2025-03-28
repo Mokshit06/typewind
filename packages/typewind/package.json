@@ -40,6 +40,14 @@
       "types": "./dist/transform.d.ts",
       "default": "./dist/transform.js"
     },
+    "./rspack": {
+      "types": "./dist/rspack.d.ts",
+      "default": "./dist/rspack.js"
+    },
+    "./rspack-plugin": {
+      "types": "./dist/rspack-plugin.d.ts",
+      "default": "./dist/rspack-plugin.js"
+    },
     "./swc": "./dist/typewind_swc.wasm"
   },
   "keywords": [
@@ -47,6 +55,7 @@
     "tailwind",
     "tailwindcss",
     "babel-plugin",
+    "rspack",
     "zero-runtime"
   ],
   "author": "",

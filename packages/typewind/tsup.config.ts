@@ -9,6 +9,8 @@ export default defineConfig({
     'src/evaluate.ts',
     'src/transform.ts',
     'src/cn.ts',
+    'src/rspack.ts',
+    'src/rspack-plugin.ts',
   ],
   splitting: false,
   clean: true,
