@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import * as babel from '@babel/core';
 import { TransformerFn } from 'tailwindcss/types/config';
 

@@ -8,7 +8,7 @@ use swc_core::{
         ast::Program,
         ast::*,
         transforms::testing::test,
-        visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
+        visit::{visit_mut_pass, VisitMut, VisitMutWith},
     },
 };
 
@@ -215,7 +215,7 @@ impl VisitMut for TransformVisitor {
 
 #[plugin_transform]
 pub fn process_transform(program: Program, _metadata: TransformPluginProgramMetadata) -> Program {
-    program.fold_with(&mut as_folder(TransformVisitor::new()))
+    program.apply(visit_mut_pass(TransformVisitor::new()))
 }
 
 fn setup_rule_map() -> CandidateValueMap {
@@ -224,7 +224,7 @@ fn setup_rule_map() -> CandidateValueMap {
 
 test!(
     Default::default(),
-    |_| as_folder(TransformVisitor::new()),
+    |_| visit_mut_pass(TransformVisitor::new()),
     boo,
     r#"let style = tw.flex.$lg(tw.bg_black$['20']).md(tw.important(tw.works).text_["18px"].text_["red-200"]).variant('&:nth-child(3)', tw.underline).raw("s-1/2")"#
 );
