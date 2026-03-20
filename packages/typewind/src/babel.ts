@@ -50,7 +50,7 @@ try {
   }
 } catch (error) {
   throw new Error(\`Error in evaluating typewind expression: ${code.replace(
-    '`',
+    /\`/g,
     '\\`'
   )}. \${error}\`)
 }

@@ -64,7 +64,8 @@ export function createTypewindContext() {
       external: ['node_modules/*'],
     }).outputFiles[0].text;
 
-    config = _eval(preprocessedConfig, true) as any;
+    const evalResult = _eval(preprocessedConfig, true) as any;
+    config = evalResult.default ?? evalResult;
   } else {
     config = require(configFile);
   }
