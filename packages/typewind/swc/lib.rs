@@ -51,7 +51,7 @@ fn analyse_expr(v: &mut TransformVisitor, wr: &mut Vec<String>, e: &Expr) {
                 MemberProp::Ident(ident) => fmt_to_tailwind(ident.sym.as_ref()),
                 MemberProp::Computed(computed) => {
                     match computed.expr.as_lit().expect("Only literal values allowed") {
-                        Lit::Str(str) => str.value.to_string(),
+                        Lit::Str(str) => str.value.to_atom_lossy().to_string(),
                         _ => panic!("Only string literal values allowed"),
                     }
                 }
@@ -136,7 +136,7 @@ fn analyse_expr(v: &mut TransformVisitor, wr: &mut Vec<String>, e: &Expr) {
                     .as_lit()
                     .expect("Only literal values allowed")
                 {
-                    Lit::Str(str) => str.value.to_string(),
+                    Lit::Str(str) => str.value.to_atom_lossy().to_string(),
                     _ => panic!("Only string literal values allowed"),
                 };
 
@@ -149,7 +149,7 @@ fn analyse_expr(v: &mut TransformVisitor, wr: &mut Vec<String>, e: &Expr) {
                     .as_lit()
                     .expect("Only literal values allowed")
                 {
-                    Lit::Str(str) => format!("[{}]:", str.value.as_ref()),
+                    Lit::Str(str) => format!("[{}]:", &*str.value.to_atom_lossy()),
                     _ => panic!("Only string literal values allowed"),
                 };
 
