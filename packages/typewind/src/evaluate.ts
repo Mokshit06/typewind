@@ -42,6 +42,9 @@ export const createTw: any = () => {
         // remove symbols
         if (typeof p !== 'string') return null;
 
+        // guard against prototype pollution
+        if (p === '__proto__' || p === 'constructor' || p === 'prototype') return thisTw;
+
         // changes _ to -
         const name = fmtToTailwind(p);
 
