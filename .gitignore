@@ -1,3 +1,6 @@
 node_modules
 .vscode
 .DS_STORE
+.env
+.env.*
+!.env.example

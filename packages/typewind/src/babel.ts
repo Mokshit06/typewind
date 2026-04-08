@@ -37,6 +37,11 @@ export default function headingBabelPlugin(): PluginObj<
 
         const code: string = generator(prevPath.node).code;
 
+        // SECURITY: `code` is derived from babel AST output of user source files.
+        // The _eval() call executes it in a sandboxed context at build time.
+        // We must properly escape `code` in the error message template literal
+        // to prevent template literal injection (all backticks and ${ sequences).
+        const escapedCode = code.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
         const { result } = _eval(
           `
 const { createTw } = require("typewind/dist/evaluate.js");
@@ -49,10 +54,7 @@ try {
     exports.result = result$$.toString();
   }
 } catch (error) {
-  throw new Error(\`Error in evaluating typewind expression: ${code.replace(
-    '`',
-    '\\`'
-  )}. \${error}\`)
+  throw new Error(\`Error in evaluating typewind expression: ${escapedCode}. \${error}\`)
 }
 `,
           true
