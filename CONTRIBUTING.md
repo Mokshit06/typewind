@@ -35,3 +35,57 @@ npm run build
 and then run each of the examples in `examples/*` to test that the changes are working as intended.
 
 Please ensure that the tests are passing when submitting a pull request. If you're adding new features to Typewind's SWC plugin, please include tests.
+
+## Debugging the WASM plugin
+
+Typewind's SWC plugin is written in Rust and compiled to a WASM binary targeting `wasm32-wasip1` (WASI). Because the plugin uses the WASI target, standard Rust debugging macros like `println!()`, `eprintln!()`, and `dbg!()` are fully functional and will produce output.
+
+### Adding debug output
+
+Add `println!()`, `eprintln!()`, or `dbg!()` calls inside the visitor methods in `packages/typewind/swc/lib.rs`. For example:
+
+```rust
+impl VisitMut for TransformVisitor {
+    fn visit_mut_expr(&mut self, e: &mut Expr) {
+        eprintln!("visiting expression: {:?}", e);
+        // ...
+    }
+}
+```
+
+> **Note:** These macros work because the plugin targets `wasm32-wasip1`. They would be no-ops if the target were `wasm32-unknown-unknown`.
+
+### Viewing logs during tests
+
+By default, `cargo test` captures stdout and stderr and only shows them for failing tests. To see debug output from passing tests, use the `--nocapture` flag:
+
+```sh
+cargo test -- --nocapture
+```
+
+Make sure your debug prints are inside the visitor or transform logic (e.g. `TransformVisitor`'s `VisitMut` methods or `analyse_expr`), not inside the `#[plugin_transform]` entry point — the `test!()` macro invokes the visitor directly and does not call `process_transform`.
+
+### Viewing logs at build time
+
+When the plugin runs inside Next.js or another SWC-based bundler, WASI stdout/stderr output surfaces in the build terminal. Add temporary `eprintln!()` calls, rebuild the plugin:
+
+```sh
+cd packages/typewind
+cargo build-wasi --release && cp target/wasm32-wasip1/release/typewind_swc.wasm dist
+```
+
+Then run the consuming project's build (e.g. `npm run dev` in one of the `examples/*` apps). Debug output will appear in the terminal alongside the normal build logs.
+
+### Where to find snapshot test output
+
+The SWC test snapshots live in:
+
+```
+packages/typewind/tests/__swc_snapshots__/swc/lib.rs/
+```
+
+If a test fails, the diff between expected and actual output is printed to the terminal. To update snapshots after intentional changes:
+
+```sh
+UPDATE=1 cargo test
+```
