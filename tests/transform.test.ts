@@ -47,4 +47,41 @@ describe('transformBabel', () => {
   test('works with transform', () => {
     setupTest(fixturesDir, 'transform');
   });
+
+  test('content without tw usage passes through unchanged', () => {
+    setupTest(fixturesDir, 'normal-usage');
+    const input = `const x = 1 + 2;`;
+    const result = transformBabel('js', input);
+    expect(result).toBeDefined();
+    expect(result).toContain('const x = 1 + 2');
+  });
+
+  test('multiple tw expressions in one file', () => {
+    setupTest(fixturesDir, 'normal-usage');
+    const input = `import { tw } from 'typewind';
+const a = tw.border;
+const b = tw.flex;`;
+    const result = transformBabel('ts', input);
+    expect(result).toBeDefined();
+    expect(result).toContain('"border"');
+    expect(result).toContain('"flex"');
+  });
+
+  test('js extension adds jsx syntax plugin', () => {
+    setupTest(fixturesDir, 'normal-usage');
+    const input = `import { tw } from 'typewind';
+const styles = tw.border;`;
+    const result = transformBabel('js', input);
+    expect(result).toBeDefined();
+    expect(result).toContain('"border"');
+  });
+
+  test('jsx extension handles JSX syntax', () => {
+    setupTest(fixturesDir, 'normal-usage');
+    const input = `import { tw } from 'typewind';
+const el = <div className={tw.flex}>hello</div>;`;
+    const result = transformBabel('jsx', input);
+    expect(result).toBeDefined();
+    expect(result).toContain('"flex"');
+  });
 });

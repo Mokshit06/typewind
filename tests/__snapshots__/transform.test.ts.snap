@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`transformBabel content without tw usage passes through unchanged 1`] = `
+"import { tw } from 'typewind';
+import './index.css';
+export default function App() {
+  return <div className={"h-screen w-full bg-gray-800 flex justify-center items-center"}>
+      <p className={"text-blue-100/25"}>Hello World!</p>
+    </div>;
+}"
+`;
+
+exports[`transformBabel js extension adds jsx syntax plugin 1`] = `
+"import { tw } from 'typewind';
+import './index.css';
+export default function App() {
+  return <div className={"h-screen w-full bg-gray-800 flex justify-center items-center"}>
+      <p className={"text-blue-100/25"}>Hello World!</p>
+    </div>;
+}"
+`;
+
+exports[`transformBabel jsx extension handles JSX syntax 1`] = `
+"import { tw } from 'typewind';
+import './index.css';
+export default function App() {
+  return <div className={"h-screen w-full bg-gray-800 flex justify-center items-center"}>
+      <p className={"text-blue-100/25"}>Hello World!</p>
+    </div>;
+}"
+`;
+
+exports[`transformBabel multiple tw expressions in one file 1`] = `
+"import { tw } from 'typewind';
+import './index.css';
+export default function App() {
+  return <div className={"h-screen w-full bg-gray-800 flex justify-center items-center"}>
+      <p className={"text-blue-100/25"}>Hello World!</p>
+    </div>;
+}"
+`;
+
 exports[`transformBabel works with arbitrary-values 1`] = `
 "import { tw } from 'typewind';
 export default function Button() {
