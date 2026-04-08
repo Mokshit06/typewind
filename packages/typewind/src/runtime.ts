@@ -48,6 +48,9 @@ export function createRuntimeTw() {
 
         if (typeof p !== 'string') return null;
 
+        // guard against prototype pollution
+        if (p === '__proto__' || p === 'constructor' || p === 'prototype') return thisTw;
+
         const name = fmtToTailwind(p);
 
         if (target.prevProp?.endsWith('-')) {

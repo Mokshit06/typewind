@@ -23,6 +23,7 @@ export function loadConfig(): {
 
 function getConfigPath() {
   const config = loadConfig();
+  const cwd = process.cwd();
 
   for (const configFile of [
     config.configPath,
@@ -31,10 +32,22 @@ function getConfigPath() {
     './tailwind.config.cjs',
   ]) {
     try {
-      const configPath = path.join(process.cwd(), configFile);
+      const configPath = path.resolve(cwd, configFile);
+
+      // Prevent path traversal outside the project directory
+      if (!configPath.startsWith(cwd + path.sep) && configPath !== cwd) {
+        throw new Error(
+          `Tailwind config path "${configFile}" resolves outside the project directory`
+        );
+      }
+
       fs.accessSync(configPath);
       return configPath;
-    } catch (err) {}
+    } catch (err) {
+      if (err instanceof Error && err.message.includes('resolves outside')) {
+        throw err;
+      }
+    }
   }
 
   throw new Error(
